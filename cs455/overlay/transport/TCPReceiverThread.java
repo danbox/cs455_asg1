@@ -13,14 +13,14 @@ public class TCPReceiverThread extends Thread
 	private Socket				_socket;
 	private Node				_node;
 	private DataInputStream 	_din;
-	private DataOutputStream	_dout;
+	private DataOutputStream	_dout; //not needed?
 	
-	public TCPReceiverThread(Socket socket, Node node) throws IOException
+	public TCPReceiverThread(Node node, Socket socket) throws IOException
 	{
 		_socket = socket;
 		_node = node;
 		_din = new DataInputStream(_socket.getInputStream());
-		_dout = new DataOutputStream(_socket.getOutputStream());
+		_dout = new DataOutputStream(_socket.getOutputStream()); //not needed?
 		this.start();
 	}
 	
@@ -37,8 +37,10 @@ public class TCPReceiverThread extends Thread
 				byte[] data = new byte[data_length];
 				_din.readFully(data, 0, data_length);
 				
-				Event event = new Message(new String(data));
-				_node.on_event(event);
+				Event event = EventFactory.create_event("message");
+				Message m = (Message)event;
+				m.set_message(new String(data));
+				_node.on_event(m);
 				
 			} catch(SocketException se)
 			{

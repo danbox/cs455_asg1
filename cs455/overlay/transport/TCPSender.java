@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class TCPSender 
 {
-	private Socket				_socket;
+	private Socket				_socket; //not needed?
 	private DataOutputStream 	_dout;
 	
 	public TCPSender(Socket socket) throws IOException

@@ -28,7 +28,8 @@ public class MessagingNode implements Node
 		case "message":
 			Message message = (Message)event;
 			String response = message.get_message().replaceAll("", "_");
-			
+		default:
+			System.out.println("fdjskafds");	
 		}
 	}
 	

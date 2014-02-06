@@ -10,7 +10,7 @@ import cs455.overlay.node.*;
 
 public class TCPServerThread extends Thread
 {
-//	private TCPReceiverThread	_receiver;
+	private TCPReceiverThread	_receiver;
 //	private TCPSender			_sender;
 	private Node				_node;
 	
@@ -25,27 +25,19 @@ public class TCPServerThread extends Thread
 	{
 		try
 		{
-			ServerSocket ss = new ServerSocket(12321);
+			ServerSocket ss = new ServerSocket(12321); //how to close?
 
 			while(true)
 			{
 				Socket socket = ss.accept();
 				new Connection(_node, socket);
-				
-//				while(socket.isConnected())
-//				{
-//					_receiver = new TCPReceiverThread(socket);
-//					_sender = new TCPSender(socket);
-//					
-//					byte[] raw_bytes = _receiver.receive();
-//					String message = new String(raw_bytes);
-//					message = message.replaceAll(" ", "_");
-//					_sender.send_data(message.getBytes());
-//				}
+				new TCPReceiverThread(_node, socket);
 			}
+			
 		} catch(IOException ioe)
 		{
 			System.out.println(ioe.getMessage());
 		}
+		
 	}
 }

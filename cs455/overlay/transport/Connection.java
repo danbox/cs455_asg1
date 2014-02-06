@@ -9,7 +9,7 @@ public class Connection {
 	
 	private String				_name;
 	private Node				_node;
-	private TCPReceiverThread	_receiver;
+	private TCPReceiverThread	_receiver;  //not needed?
 	private TCPSender			_sender;
 	
 	public Connection(Node node, Socket socket) 
@@ -18,7 +18,7 @@ public class Connection {
 		{
 			_name = socket.getLocalAddress().toString() + ":" + socket.getPort();
 			_node = node;
-			_receiver = new TCPReceiverThread(socket, node);
+			_receiver = new TCPReceiverThread(node, socket); //not needed?
 			_sender = new TCPSender(socket);
 			
 			_node.registerConnection(this);
@@ -41,7 +41,9 @@ public class Connection {
 		} catch(IOException ioe)
 		{
 			ioe.printStackTrace();
-		}
+		} 
 		return true;
 	}
+	
+	public re
 }
