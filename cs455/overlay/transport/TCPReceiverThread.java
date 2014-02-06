@@ -37,7 +37,7 @@ public class TCPReceiverThread extends Thread
 				
 				byte[] data = new byte[data_length];
 				_din.readFully(data, 0, data_length);
-				System.out.println(data);
+				System.out.println(new String(data));
 				
 				
 //				Event event = EventFactory.create_event("message");

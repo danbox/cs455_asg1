@@ -18,7 +18,8 @@ public class TCPSender
 	public void sendData(byte[] data_to_send) throws IOException
 	{
 		int data_length = data_to_send.length;
-		_dout.writeInt(data_length);
+		data_length = 10;
+//		_dout.writeInt(data_length);
 		_dout.write(data_to_send, 0, data_length);
 		_dout.flush();
 	}
