@@ -5,7 +5,7 @@ import cs455.overlay.transport.*;
 
 public interface Node 
 {
-	public void on_event(Event event);
+	public void onEvent(Event event);
 	
 	public void registerConnection(Connection connection);
 	

@@ -10,7 +10,7 @@ import cs455.overlay.node.*;
 
 public class TCPServerThread extends Thread
 {
-	private TCPReceiverThread	_receiver;
+	private TCPReceiverThread	_receiver; //don't think is needed
 //	private TCPSender			_sender;
 	private Node				_node;
 	
@@ -25,13 +25,13 @@ public class TCPServerThread extends Thread
 	{
 		try
 		{
-			ServerSocket ss = new ServerSocket(12321); //how to close?
+			ServerSocket ss = new ServerSocket(12323); //how to close?
 
 			while(true)
 			{
 				Socket socket = ss.accept();
 				new Connection(_node, socket);
-				new TCPReceiverThread(_node, socket);
+//				new TCPReceiverThread(_node, socket);
 			}
 			
 		} catch(IOException ioe)

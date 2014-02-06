@@ -53,7 +53,7 @@ public class Registry implements Node
 		System.out.println("Server started");
 		
 		Registry node = new Registry();
-		
+		while(true){}
 
 	}
 	

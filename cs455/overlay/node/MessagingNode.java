@@ -20,7 +20,7 @@ public class MessagingNode implements Node
 		_connections = new Hashtable<String, Connection>();
 	}
 	
-	public synchronized void on_event(Event event)
+	public synchronized void onEvent(Event event)
 	{
 		//TODO: registration, response, etc...
 		switch(event.get_event_type())
@@ -47,20 +47,35 @@ public class MessagingNode implements Node
 	public static void main(String[] args)
 	{
 		//TODO: figure out what the fuck to put here
+		Scanner keyboard = new Scanner(System.in);
+//		System.out.println("Send or Receive?");
+//		String input = keyboard.nextLine();
+//		switch(input.charAt(0))
+//		{
+//		case 's':
+//			//do send
+//			break;
+//		case 'r':
+//			//do receive
+//			break;
+//		default:
+//			System.out.println("invalid");
+//			break;
+//		}
 		try
 		{
-			Socket socket = new Socket("localhost", 12321);
 			MessagingNode node = new MessagingNode();
-			Connection connection = new Connection(node, socket);
-			node.registerConnection(connection);
+			Socket socket = new Socket("localhost", 12323);
+//			MessagingNode node = new MessagingNode();
+//			Connection connection = new Connection(node, socket);
+//			node.registerConnection(connection);
 			Scanner kb = new Scanner(System.in);
 			String input = kb.nextLine();
 			while(input != null || !input.equalsIgnoreCase("quit"))
 			{
-				connection.sendData(input.concat("\n").getBytes());
-				String message = new String(receiver.receive());
-				System.out.println("From server: " + message);
-				input = kb.nextLine();
+				TCPSender sender = new TCPSender(socket);
+				sender.sendData(input.concat("\n").getBytes());
+				
 			}
 
 		} catch(IOException ioe)

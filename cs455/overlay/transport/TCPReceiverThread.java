@@ -32,15 +32,18 @@ public class TCPReceiverThread extends Thread
 		{
 			try
 			{
-				data_length = _din.readInt();
+//				data_length = _din.readInt();
+				data_length = 10;
 				
 				byte[] data = new byte[data_length];
 				_din.readFully(data, 0, data_length);
+				System.out.println(data);
 				
-				Event event = EventFactory.create_event("message");
-				Message m = (Message)event;
-				m.set_message(new String(data));
-				_node.on_event(m);
+				
+//				Event event = EventFactory.create_event("message");
+//				Message m = (Message)event;
+//				m.set_message(new String(data));
+//				_node.on_event(m);
 				
 			} catch(SocketException se)
 			{
