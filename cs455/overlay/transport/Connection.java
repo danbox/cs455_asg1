@@ -20,7 +20,7 @@ public class Connection {
 			_node = node;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
-			
+			_receiver.start();
 			_node.registerConnection(this);
 		} catch(IOException ioe)
 		{
