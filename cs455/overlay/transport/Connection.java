@@ -19,7 +19,6 @@ public class Connection {
 			_name = socket.getLocalAddress().toString() + ":" + socket.getPort();
 			_node = node;
 			_receiver = new TCPReceiverThread(node, socket); 
-			_receiver.start();
 			_sender = new TCPSender(socket);
 			
 			_node.registerConnection(this);
