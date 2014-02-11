@@ -110,11 +110,13 @@ public class MessagingNode implements Node
 //			node.registerConnection(connection);
 			Scanner kb = new Scanner(System.in);
 			String input = kb.nextLine();
+			Connection conn = new Connection(node, socket);
 			while(input != null || !input.equalsIgnoreCase("quit"))
 			{
-				TCPSender sender = new TCPSender(socket);
-				sender.sendData(input.concat("\n").getBytes());
-				
+				conn.sendData(input.concat("/n").getBytes());
+				String message = new String(conn.recieveData());
+				System.out.println("From server: " + message);
+				input = kb.nextLine();
 			}
 			kb.close();
 
