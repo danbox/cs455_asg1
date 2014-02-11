@@ -7,6 +7,8 @@ public interface Node
 {
 	public void onEvent(Event event);
 	
+	public int getPortNum();
+	
 	public void registerConnection(Connection connection);
 	
 	public void deregisterConnection(Connection connection);

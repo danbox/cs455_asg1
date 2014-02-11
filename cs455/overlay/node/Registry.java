@@ -42,43 +42,37 @@ public class Registry implements Node
 	
 	public synchronized void registerConnection(Connection connection)
 	{
-		
+		_connections.put(connection.getName(), connection);
 	}
 	
 	public synchronized void deregisterConnection(Connection connection)
 	{
-		
+		_connections.remove(connection.getName());
 	}
 	
 	public static void main(String[] args)
-	{
-//		try
-//		{
-//			ServerSocket serverSocket = new ServerSocket(12321);
-//			
-//		} catch(IOException ioe)
-//		{
-//			ioe.printStackTrace();
-//		}
+	{	
+		Registry node = new Registry();
+		
 		//get port number
-        if(args.length != 2)
+        if(args.length != 1)
         {
+        	System.out.println(args.length);
             System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.Registry <port-num>");
             System.exit(1);
         } else
         {
             try
             {
-                _portnum = Integer.parseInt(args[1]);
-            } catch(Exception e)
+                node.setPortNum(Integer.parseInt(args[0]));
+            } catch(NumberFormatException nfe)
             {
-                e.printStackTrace();
+                nfe.printStackTrace();
             }
         }
 		System.out.println("Server started");
-		
-		Registry node = new Registry();
-		while(true){}
+		System.out.println(node.getPortNum());
+		node._server.start();
 
 	}
 	

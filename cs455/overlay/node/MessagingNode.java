@@ -13,8 +13,8 @@ public class MessagingNode implements Node
 {
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
-    private String                          _registryIP
-    private int                             _portnum
+    private String                          _registryHostName;
+    private int                             _portnum;
 	
 	public MessagingNode()
 	{
@@ -32,14 +32,14 @@ public class MessagingNode implements Node
         return _portnum;
     }
 
-    public void setRegistryIP(String regIP)
+    public void setRegistryHostName(String regName)
     {
-        _registryIP = regIP;
+        _registryHostName = regName;
     }
 
-    public String getRegistryIP()
+    public String getRegistryHostName()
     {
-        return _registryIP;
+        return _registryHostName;
     }
 
 	public synchronized void onEvent(Event event)
@@ -68,17 +68,23 @@ public class MessagingNode implements Node
 	
 	public static void main(String[] args)
 	{
-		//TODO: figure out what the fuck to put here
-		Scanner keyboard = new Scanner(System.in);
         MessagingNode node = new MessagingNode();
-        if(args.length != 3)
+
+        if(args.length != 2) //invalid number of arguments
         {
             System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.MessagingNode <registry-host> <port-num>");
             System.exit(1);
-        } else
+        } else //parse command line args
         {
-            node.setRegistryIP(args[1]);
-            node.setPortNum(Integer.parse(args[2]));
+            node.setRegistryHostName(args[0]);
+            try
+            {
+            	node.setPortNum(Integer.parseInt(args[1]));
+
+            }catch(NumberFormatException nfe)
+            {
+            	nfe.printStackTrace();
+            }
         }
 
 
@@ -110,6 +116,7 @@ public class MessagingNode implements Node
 				sender.sendData(input.concat("\n").getBytes());
 				
 			}
+			kb.close();
 
 		} catch(IOException ioe)
 		{
