@@ -11,6 +11,7 @@ public class Registry implements Node
 {
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
+    private int                             _portnum;
 	
 	public Registry()
 	{
@@ -28,6 +29,16 @@ public class Registry implements Node
 			break;
 		}
 	}
+
+    public void setPortNum(int port)
+    {
+        _portnum = port;
+    }
+
+    public int getPortNum()
+    {
+        return _portnum;
+    }
 	
 	public synchronized void registerConnection(Connection connection)
 	{
@@ -49,7 +60,21 @@ public class Registry implements Node
 //		{
 //			ioe.printStackTrace();
 //		}
-		
+		//get port number
+        if(args.length != 2)
+        {
+            System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.Registry <port-num>");
+            System.exit(1);
+        } else
+        {
+            try
+            {
+                _portnum = Integer.parseInt(args[1]);
+            } catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
 		System.out.println("Server started");
 		
 		Registry node = new Registry();

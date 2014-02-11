@@ -13,6 +13,8 @@ public class MessagingNode implements Node
 {
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
+    private String                          _registryIP
+    private int                             _portnum
 	
 	public MessagingNode()
 	{
@@ -20,6 +22,26 @@ public class MessagingNode implements Node
 		_connections = new Hashtable<String, Connection>();
 	}
 	
+    public void setPortNum(int port)
+    {
+        _portnum = port;
+    }
+
+    public int getPortNum()
+    {
+        return _portnum;
+    }
+
+    public void setRegistryIP(String regIP)
+    {
+        _registryIP = regIP;
+    }
+
+    public String getRegistryIP()
+    {
+        return _registryIP;
+    }
+
 	public synchronized void onEvent(Event event)
 	{
 		//TODO: registration, response, etc...
@@ -48,6 +70,18 @@ public class MessagingNode implements Node
 	{
 		//TODO: figure out what the fuck to put here
 		Scanner keyboard = new Scanner(System.in);
+        MessagingNode node = new MessagingNode();
+        if(args.length != 3)
+        {
+            System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.MessagingNode <registry-host> <port-num>");
+            System.exit(1);
+        } else
+        {
+            node.setRegistryIP(args[1]);
+            node.setPortNum(Integer.parse(args[2]));
+        }
+
+
 //		System.out.println("Send or Receive?");
 //		String input = keyboard.nextLine();
 //		switch(input.charAt(0))
@@ -64,8 +98,7 @@ public class MessagingNode implements Node
 //		}
 		try
 		{
-			MessagingNode node = new MessagingNode();
-			Socket socket = new Socket("localhost", 12323);
+			Socket socket = new Socket();
 //			MessagingNode node = new MessagingNode();
 //			Connection connection = new Connection(node, socket);
 //			node.registerConnection(connection);

@@ -25,7 +25,7 @@ public class TCPServerThread extends Thread
 	{
 		try
 		{
-			ServerSocket ss = new ServerSocket(12323); //how to close?
+			ServerSocket ss = new ServerSocket(_node.getPortNum()); //how to close?
 
 			while(true)
 			{

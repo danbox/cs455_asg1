@@ -44,4 +44,9 @@ public class Connection {
 		} 
 		return true;
 	}
+
+    public byte[] recieveData()
+    {
+        //TODO: read data
+    }
 }
