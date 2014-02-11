@@ -28,8 +28,8 @@ public class TCPReceiverThread extends Thread
 	{
 		int data_length;
 
-//		while(_socket != null)
-//		{
+		while(_socket != null)
+		{
 			try
 			{
 //				data_length = _din.readInt();
@@ -49,13 +49,13 @@ public class TCPReceiverThread extends Thread
 			} catch(SocketException se)
 			{
 				se.printStackTrace();
-//				break;
+				break;
 			} catch(IOException ioe)
 			{
 				ioe.printStackTrace();
-//				break;
+				break;
 			}
-//		}
+		}
 	}
 	
 	public byte[] receiveData()

@@ -110,12 +110,12 @@ public class MessagingNode implements Node
 //			node.registerConnection(connection);
 			Scanner kb = new Scanner(System.in);
 			String input = kb.nextLine();
-			while(input != null || !input.equalsIgnoreCase("quit"))
-			{
+//			while(input != null || !input.equalsIgnoreCase("quit"))
+//			{
 				TCPSender sender = new TCPSender(socket);
 				sender.sendData(input.concat("\n").getBytes());
 				
-			}
+//			}
 			kb.close();
 
 		} catch(IOException ioe)
