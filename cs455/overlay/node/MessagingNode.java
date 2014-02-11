@@ -104,7 +104,7 @@ public class MessagingNode implements Node
 //		}
 		try
 		{
-			Socket socket = new Socket();
+			Socket socket = new Socket(node.getRegistryHostName(), node.getPortNum());
 //			MessagingNode node = new MessagingNode();
 //			Connection connection = new Connection(node, socket);
 //			node.registerConnection(connection);
