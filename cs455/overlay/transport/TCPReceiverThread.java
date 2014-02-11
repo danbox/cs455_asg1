@@ -22,6 +22,7 @@ public class TCPReceiverThread extends Thread
 		_node = node;
 		_din = new DataInputStream(_socket.getInputStream());
 		_dout = new DataOutputStream(_socket.getOutputStream()); //not needed?
+		_data = new byte[10];
 	}
 	
 	public void run()
@@ -35,7 +36,7 @@ public class TCPReceiverThread extends Thread
 //				data_length = _din.readInt();
 				data_length = 10;
 				
-				_data = new byte[data_length];
+				//_data = new byte[data_length];
 				_din.readFully(_data, 0, data_length);
 //						System.out.println(new String(_data));
 
