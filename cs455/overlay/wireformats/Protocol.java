@@ -1,22 +1,16 @@
 package cs455.overlay.wireformats;
 
-public enum Protocol 
+public class Protocol 
 {
 	//Event types
-	DEREGISTER(0), 			
-	LINKWEIGHTS(1), 			
-	MESSAGE(2), 				
-	REGISTER_REQUEST(3), 		
-	REGISTER_RESPONSE(4), 		
-	TASK_COMPLETE(5),
-	TASK_INITIATE(6), 			
-	TASK_SUMMARY_REQUEST(7),	
-	TASK_SUMMARY_RESPONSE(8);
+    public final static int	DEREGISTER              = 5000;
+	public final static int LINK_WEIGHTS            = 5001;
+	public final static int MESSAGE                 = 5002, 				
+	public final static int REGISTER_REQUEST        = 5003;
+	public final static int REGISTER_RESPONSE       = 5004;	
+	public final static int TASK_COMPLETE           = 5005;
+	public final static int TASK_INITIATE           = 5006;
+	public final static int TASK_SUMMARY_REQUEST    = 5007;	
+	public final static int TASK_SUMMARY_RESPONSE   = 5008;
 
-	public final int value;
-	
-	private Protocol(int value)
-	{
-		this.value = value;
-	}
 }

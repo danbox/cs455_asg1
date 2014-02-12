@@ -23,30 +23,32 @@ public class EventFactory
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(data);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
-
+        
+        int eventType = din.readInt();
+        baInputStream.close();
+        din.close();
 
 		try
 		{
-			int eventType = din.readInt();
 			switch(eventType)
 			{
-			case 0:
+			case Protocol.DEREGISTER:
 				return new Deregister();
-			case 1:
+			case Protocol.LINK_WEIGHTS:
 				return new LinkWeights();
-			case 2:
+			case Protocol.MESSAGE:
 				return new Message();
-			case 3:
+			case Protocol.REGISTER_RESPONSE:
 				return new RegisterResponse();
-			case 4:
+			case Protocol.REGISTER_REQUEST:
 				return new RegisterRequest(data);
-			case 5:
+			case Protocol.TASK_COMPLETE:
 				return new TaskComplete();
-			case 6:
+			case Protocol.TASK_INITIATE:
 				return new TaskInitiate();
-			case 7:
+			case Protocol.TASK_SUMMARY_REQUEST:
 				return new TaskSummaryRequest();
-			case 8:
+			case Protocol.TASK_SUMMARY_RESPONSE:
 				return new TaskSummaryResponse();
 			default:
 				return new Message();
@@ -58,12 +60,12 @@ public class EventFactory
 		return null;
 	}
 
-	public static Event createEvent(Protocol eventType)
+	public static Event createEvent(int eventType)
 	{
 
 		switch(eventType)
 		{
-		case REGISTER_REQUEST:
+		case Protocol.REGISTER_REQUEST:
 			return new RegisterRequest();
 		default:
 			return null;

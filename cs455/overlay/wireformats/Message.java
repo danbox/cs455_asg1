@@ -25,7 +25,7 @@ public class Message implements Event
 	}
 	
 	@Override
-	public Protocol getType()
+	public int getType()
 	{
 		return null;
 	}

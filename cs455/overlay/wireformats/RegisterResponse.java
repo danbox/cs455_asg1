@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class RegisterResponse implements Event
 {
-	private final int	_TYPE = Protocol.REGISTER_RESPONSE.value;
+	private final int	_TYPE = Protocol.REGISTER_RESPONSE;
 	private byte		_success;
 	private String		_additionalInfo;
 	
@@ -30,7 +30,11 @@ public class RegisterResponse implements Event
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 		
-		din.readInt(); //read int for type
+		int type = din.readInt(); //read int for type
+        if(type != _type)
+        {
+            System.out.println("Err: Invalid type");
+        }
 		
 		_success = din.readByte();
 		
@@ -45,7 +49,7 @@ public class RegisterResponse implements Event
 	}
 	
 	@Override
-	public Protocol getType() {
+	public int getType() {
 		return Protocol.REGISTER_RESPONSE;
 	}
 
@@ -73,5 +77,19 @@ public class RegisterResponse implements Event
 		
 		return marshalledBytes;
 	}
+
+    @Override
+    public String toString()
+    {
+        String successString = new String();
+        if(_success == 0)
+        {
+            successString = "SUCCESS";
+        }else
+        {
+            successString = "FAILURE";
+        }
+        return successString + _additionalInfo;
+    }
 
 }
