@@ -32,7 +32,8 @@ public class Registry implements Node
 				Socket socket = new Socket(request.getIP(), request.getPort());
 				//need to verify ip address...
 				//otherwise send deregister?
-				registerConnection(new Connection(this, socket));
+				Connection connection = new Connection(this, socket);
+				registerConnection(connection);
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();

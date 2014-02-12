@@ -26,7 +26,6 @@ public class TCPReceiverThread extends Thread
 	public void run()
 	{
 		int dataLength;
-		int eventType;
 
 		while(_socket != null)
 		{

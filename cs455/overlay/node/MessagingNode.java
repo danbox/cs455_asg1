@@ -48,10 +48,9 @@ public class MessagingNode implements Node
 		switch(event.getType())
 		{
 		case REGISTER_RESPONSE:
-			Message message = (Message)event;
-			String response = message.get_message().replaceAll(" ", "_");
+			
 		default:
-			System.out.println("fdjskafds");	
+			System.out.println("Invalid event");	
 		}
 	}
 	
