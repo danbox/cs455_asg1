@@ -1,6 +1,9 @@
 package cs455.overlay.wireformats;
 
+import java.io.IOException;
+
 public interface Event 
 {
-	public String get_event_type();
+	public Protocol getType();
+	public byte[] getBytes() throws IOException;
 }

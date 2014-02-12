@@ -45,11 +45,11 @@ public class MessagingNode implements Node
 	public synchronized void onEvent(Event event)
 	{
 		//TODO: registration, response, etc...
-		switch(event.get_event_type())
+		switch(event.getType())
 		{
-		case "message":
+		case REGISTER_RESPONSE:
 			Message message = (Message)event;
-			String response = message.get_message().replaceAll("", "_");
+			String response = message.get_message().replaceAll(" ", "_");
 		default:
 			System.out.println("fdjskafds");	
 		}
@@ -86,39 +86,14 @@ public class MessagingNode implements Node
             	nfe.printStackTrace();
             }
         }
-
-
-//		System.out.println("Send or Receive?");
-//		String input = keyboard.nextLine();
-//		switch(input.charAt(0))
-//		{
-//		case 's':
-//			//do send
-//			break;
-//		case 'r':
-//			//do receive
-//			break;
-//		default:
-//			System.out.println("invalid");
-//			break;
-//		}
 		try
 		{
 			Socket socket = new Socket(node.getRegistryHostName(), node.getPortNum());
-//			MessagingNode node = new MessagingNode();
-//			Connection connection = new Connection(node, socket);
-//			node.registerConnection(connection);
-			Scanner kb = new Scanner(System.in);
-			String input = kb.nextLine();
-			Connection conn = new Connection(node, socket);
-			while(input != null || !input.equalsIgnoreCase("quit"))
-			{
-				conn.sendData(input.concat("/n").getBytes());
-				String message = new String(conn.recieveData());
-				System.out.println("From server: " + message);
-				input = kb.nextLine();
-			}
-			kb.close();
+			Connection connection = new Connection(node, socket);
+			RegisterRequest event = (RegisterRequest)EventFactory.createEvent(Protocol.REGISTER_REQUEST);
+			event.setIP(socket.getLocalAddress().toString());
+			event.setPort(socket.getLocalPort());
+			connection.sendData(event.getBytes());
 
 		} catch(IOException ioe)
 		{

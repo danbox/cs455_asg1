@@ -2,6 +2,7 @@ package cs455.overlay.node;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Hashtable;
 
 import cs455.overlay.wireformats.*;
@@ -21,11 +22,26 @@ public class Registry implements Node
 	
 	public synchronized void onEvent(Event event)
 	{
-		switch(event.get_event_type())
+		switch(event.getType())
 		{
-		case "message":
+		case REGISTER_REQUEST:
+			RegisterRequest request = (RegisterRequest)event;
+			//create connection?
+			try
+			{
+				Socket socket = new Socket(request.getIP(), request.getPort());
+				//need to verify ip address...
+				//otherwise send deregister?
+				registerConnection(new Connection(this, socket));
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+			
+			
 			break;
 		default:
+			//invalid event?
 			break;
 		}
 	}

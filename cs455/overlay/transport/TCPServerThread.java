@@ -29,12 +29,15 @@ public class TCPServerThread extends Thread
 			while(true)
 			{
 				Socket socket = ss.accept();
-				Connection conn = new Connection(_node, socket);
+				new Connection(_node, socket);
+				
+				
+				
 //				new TCPReceiverThread(_node, socket);
-				byte[] raw = conn.recieveData();
-				String message = new String(raw);
-				message = message.replaceAll("",  "_");
-				conn.sendData(message.getBytes());
+//				byte[] raw = conn.recieveData();
+//				String message = new String(raw);
+//				message = message.replaceAll("",  "_");
+//				conn.sendData(message.getBytes());
 			}
 			
 		} catch(IOException ioe)

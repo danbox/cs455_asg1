@@ -45,8 +45,4 @@ public class Connection {
 		return true;
 	}
 
-    public byte[] recieveData()
-    {
-    	return _receiver.receiveData();
-    }
 }

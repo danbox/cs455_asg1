@@ -4,7 +4,13 @@ public class TaskInitiate implements Event
 {
 
 	@Override
-	public String get_event_type() {
+	public Protocol getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] getBytes() {
 		// TODO Auto-generated method stub
 		return null;
 	}

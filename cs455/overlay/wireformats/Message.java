@@ -24,8 +24,15 @@ public class Message implements Event
 		return _message;
 	}
 	
-	public String get_event_type()
+	@Override
+	public Protocol getType()
 	{
-		return "message";
+		return null;
+	}
+
+	@Override
+	public byte[] getBytes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
