@@ -3,9 +3,9 @@ package cs455.overlay.wireformats;
 public class TaskComplete implements Event
 {
 	@Override
-	public Protocol getType() 
+	public int getType() 
 	{
-		return null;
+		return 0;
 	}
 
 	@Override

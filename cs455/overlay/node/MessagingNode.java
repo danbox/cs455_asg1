@@ -42,13 +42,18 @@ public class MessagingNode implements Node
         return _registryHostName;
     }
 
-	public synchronized void onEvent(Event event)
+	public synchronized void onEvent(Event event, Socket socket)
 	{
 		//TODO: registration, response, etc...
 		switch(event.getType())
 		{
-		case REGISTER_RESPONSE:
-			
+		case Protocol.REGISTER_RESPONSE:
+			RegisterResponse response = (RegisterResponse)event;
+			if(response.getSuccess() == 0)
+			{
+				System.out.println("Successful Registration");
+			}
+			break;
 		default:
 			System.out.println("Invalid event");	
 		}
@@ -89,10 +94,10 @@ public class MessagingNode implements Node
 		{
 			Socket socket = new Socket(node.getRegistryHostName(), node.getPortNum());
 			Connection connection = new Connection(node, socket);
-			RegisterRequest event = (RegisterRequest)EventFactory.createEvent(Protocol.REGISTER_REQUEST);
-			event.setIP(socket.getLocalAddress().toString());
-			event.setPort(socket.getLocalPort());
-			connection.sendData(event.getBytes());
+			RegisterRequest request = new RegisterRequest(socket.getLocalAddress().toString(), socket.getLocalPort());
+//			event.setIP(socket.getLocalAddress().toString());
+//			event.setPort(socket.getLocalPort());
+			connection.sendData(request.getBytes());
 
 		} catch(IOException ioe)
 		{

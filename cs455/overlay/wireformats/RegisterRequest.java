@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class RegisterRequest implements Event
 {
-	private final int 	_TYPE = Protocol.REGISTER_REQUEST.value;
+	private final int 	_TYPE = Protocol.REGISTER_REQUEST;
 	private String 		_ip;
 	private int			_port;
 	
@@ -30,7 +30,12 @@ public class RegisterRequest implements Event
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 		
-		din.readInt(); //read int for type
+		int type = din.readInt(); //read int for type
+        if(type != _TYPE) //invalid type
+        {
+            System.out.println("Invalid type");
+            return;
+        }
 		
 		int ipLength = din.readInt();
 		byte[] ipBytes = new byte[ipLength];
@@ -65,7 +70,7 @@ public class RegisterRequest implements Event
 	}
 	
 	@Override
-	public Protocol getType() {
+	public int getType() {
 		return Protocol.REGISTER_REQUEST;
 	}
 
@@ -93,5 +98,11 @@ public class RegisterRequest implements Event
 		
 		return marshalledBytes;
 	}
+
+    @Override
+    public String toString()
+    {
+        return "IP address: " + _ip + ", Port number: " + _port;
+    }
 
 }

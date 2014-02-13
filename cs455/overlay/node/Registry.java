@@ -20,20 +20,33 @@ public class Registry implements Node
 		_connections = new Hashtable<String, Connection>();
 	}
 	
-	public synchronized void onEvent(Event event)
+	@Override
+	public synchronized void onEvent(Event event, Socket socket)
 	{
 		switch(event.getType())
 		{
-		case REGISTER_REQUEST:
+		case Protocol.REGISTER_REQUEST:
 			RegisterRequest request = (RegisterRequest)event;
 			//create connection?
 			try
 			{
-				Socket socket = new Socket(request.getIP(), request.getPort());
+				//Socket socket = new Socket(request.getIP(), request.getPort());
 				//need to verify ip address...
 				//otherwise send deregister?
-				Connection connection = new Connection(this, socket);
-				registerConnection(connection);
+				if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
+				{
+					Connection connection = new Connection(this, socket);
+					registerConnection(connection);
+					
+					//create register response
+					Event responseEvent = EventFactory.createEvent(Protocol.REGISTER_RESPONSE);
+					RegisterResponse response = (RegisterResponse)responseEvent;
+					response.setSuccess((byte)0);
+					response.setAdditionalInfo("");
+					connection.sendData(response.getBytes());
+				}
+				
+				
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();

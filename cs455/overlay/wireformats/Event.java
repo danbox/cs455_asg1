@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface Event 
 {
-	public Protocol getType();
+	public int getType();
 	public byte[] getBytes() throws IOException;
 }

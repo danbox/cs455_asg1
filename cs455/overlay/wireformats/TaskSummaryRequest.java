@@ -4,9 +4,9 @@ public class TaskSummaryRequest implements Event
 {
 
 	@Override
-	public Protocol getType() {
+	public int getType() {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
