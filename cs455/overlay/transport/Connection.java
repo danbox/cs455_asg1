@@ -16,7 +16,7 @@ public class Connection {
 	{
 		try
 		{
-			_name = socket.getLocalAddress().toString() + ":" + socket.getPort();
+			_name = socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort();
 			_node = node;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
