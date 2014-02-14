@@ -90,7 +90,7 @@ public class Registry implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
-		Connection connection = _connections.get(socket.getLocalAddress().toString() + ":" + socket.getPort());
+		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
 		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
 		{
 			success = 0;
@@ -119,7 +119,7 @@ public class Registry implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
-		Connection connection = _connections.get(socket.getLocalAddress().toString() + ":" + socket.getPort());
+		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
 		if(request.getNodeIP().equals(socket.getInetAddress().toString())) //valid ip address in request
 		{
 			success = 0;
