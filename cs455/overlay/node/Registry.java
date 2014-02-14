@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
+import java.util.Scanner;
+import java.util.Set;
 
 import cs455.overlay.wireformats.*;
 import cs455.overlay.transport.*;
@@ -137,6 +139,15 @@ public class Registry implements Node
 
 		return success;
 	}
+	
+	public void listMessagingNodes()
+	{
+		Set<String> keys = _connections.keySet();
+		for(String key : keys)
+		{
+			System.out.println(_connections.get(key).getName());
+		}
+	}
 
 
 	public static void main(String[] args)
@@ -163,6 +174,50 @@ public class Registry implements Node
 		System.out.println(node.getPortNum());
 		node._server.start();
 
+		Scanner in = new Scanner(System.in);
+		boolean quit = false;
+		while(!quit)
+		{
+			System.out.println("Awaiting input... Type help for help message");
+			String command = in.next();
+			
+			switch(command.toLowerCase())
+			{
+			case "list-messaging-nodes":
+				System.out.println("Sorry this isn't implemented yet...");
+				node.listMessagingNodes();
+				break;
+			case "list-weights":
+				System.out.println("Sorry this isn't implemented yet...");
+				break;
+			case "setup-overlay":
+				System.out.println("Sorry this isn't implemented yet...");
+				break;
+			case "send-overlay-link-weights":
+				System.out.println("Sorry this isn't implemented yet...");
+				break;
+			case "start":
+				System.out.println("Sorry this isn't implemented yet...");
+				break;
+			case "help":
+				System.out.println("Help Menu:\n"
+						+ "\tlist-messaging-nodes: prints information about connected messaging nodes\n"
+						+ "\tlist-weights: prints information about the links comprising the overlay\n"
+						+ "\tsetup-overlay <number-of-connections>: sets up the overlay with each messaging node connecting to <number-of-connections> other messaging nodes\n"
+						+ "\tsend-overlay-link-weights: sends Link_Weights message to all registered nodes in the overlay\n"
+						+ "\tstart: results in nodes exchanging messages within the overlay\n"
+						+ "\thelp: prints help message\n"
+						+ "\tquit: ends the registry node");
+				break;
+			case "quit":
+				quit = true;
+				break;
+			default:
+				System.out.println("Invalid command: " + command);	
+			}
+		}
+		in.close();
+		
 	}
 
 }
