@@ -32,19 +32,25 @@ public class EventFactory
 	        baInputStream.close();
 	        din.close();
 	        
-	        System.out.println("Event type" + eventType);
+	        System.out.println("Inside event factory, event type: " + eventType);
 	        
 			switch(eventType)
 			{
-			case Protocol.DEREGISTER:
-				return new Deregister();
+			case Protocol.DEREGISTER_REQUEST:
+				System.out.println("Creating deregister request");
+				return new DeregisterRequest(data);
+			case Protocol.DEREGISTER_RESPONSE:
+				System.out.println("Creating deregister response");
+				return new DeregisterResponse(data);
 			case Protocol.LINK_WEIGHTS:
 				return new LinkWeights();
 			case Protocol.MESSAGE:
 				return new Message();
 			case Protocol.REGISTER_RESPONSE:
+				System.out.println("Creating register response");
 				return new RegisterResponse(data);
 			case Protocol.REGISTER_REQUEST:
+				System.out.println("Creating register request");
 				return new RegisterRequest(data);
 			case Protocol.TASK_COMPLETE:
 				return new TaskComplete();

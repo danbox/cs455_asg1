@@ -33,6 +33,11 @@ public class Connection {
 		return _name;
 	}
 	
+	public Node getNode()
+	{
+		return _node;
+	}
+	
 	public boolean sendData(byte[] bytes)
 	{
 		try

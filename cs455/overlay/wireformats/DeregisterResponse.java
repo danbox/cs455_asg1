@@ -8,24 +8,24 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class RegisterResponse implements Event
+public class DeregisterResponse implements Event
 {
-	private final int	_TYPE = Protocol.REGISTER_RESPONSE;
+	private final int	_TYPE = Protocol.DEREGISTER_RESPONSE;
 	private byte		_success;
 	private String		_additionalInfo;
 	
-	public RegisterResponse()
+	public DeregisterResponse()
 	{
 		_additionalInfo = new String();
 	}
 	
-	public RegisterResponse(byte success, String additionalInfo)
+	public DeregisterResponse(byte success, String additionalInfo)
 	{
 		_success = success;
 		_additionalInfo = additionalInfo;
 	}
 	
-	public RegisterResponse(byte[] marshalledBytes) throws IOException
+	public DeregisterResponse(byte[] marshalledBytes) throws IOException
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
@@ -110,5 +110,5 @@ public class RegisterResponse implements Event
         }
         return successString + _additionalInfo;
     }
-
+	
 }

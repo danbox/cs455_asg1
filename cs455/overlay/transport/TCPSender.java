@@ -15,12 +15,11 @@ public class TCPSender
 		_dout = new DataOutputStream(socket.getOutputStream());
 	}
 	
-	public void sendData(byte[] data_to_send) throws IOException
+	public void sendData(byte[] dataToSend) throws IOException
 	{
-		int data_length = data_to_send.length;
-//		data_length = 10;
+		int data_length = dataToSend.length;
 		_dout.writeInt(data_length);
-		_dout.write(data_to_send, 0, data_length);
+		_dout.write(dataToSend, 0, data_length);
 		_dout.flush();
 	}
 }

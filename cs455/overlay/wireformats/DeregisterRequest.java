@@ -8,24 +8,24 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class RegisterRequest implements Event
+public class DeregisterRequest implements Event
 {
-	private final int 	_TYPE = Protocol.REGISTER_REQUEST;
-	private String 		_ip;
-	private int			_port;
-	
-	public RegisterRequest()
+	private final int 	_TYPE = Protocol.DEREGISTER_REQUEST;
+	private String		_nodeIP;
+	private int			_nodePort;
+
+	public DeregisterRequest()
 	{
-		_ip = new String();
+		_nodeIP = new String();
 	}
 	
-	public RegisterRequest(String ip, int port)
+	public DeregisterRequest(String ip, int port)
 	{
-		_ip = ip;
-		_port = port;
+		_nodeIP = ip;
+		_nodePort = port;
 	}
 	
-	public RegisterRequest(byte[] marshalledBytes) throws IOException
+	public DeregisterRequest(byte[] marshalledBytes) throws IOException
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
@@ -41,34 +41,33 @@ public class RegisterRequest implements Event
 		byte[] ipBytes = new byte[ipLength];
 		din.readFully(ipBytes);
 		
-		_ip = new String(ipBytes);
+		_nodeIP = new String(ipBytes);
 		
-		_port = din.readInt();
+		_nodePort = din.readInt();
 		
 		baInputStream.close();
 		din.close();
 	}
 	
-	public void setIP(String ip)
+	public void setNodeIP(String ip)
 	{
-		_ip = ip;
+		_nodeIP = ip;
 	}
 	
-	public String getIP()
+	public String getNodeIP()
 	{
-		return _ip;
+		return _nodeIP;
 	}
 	
-	public void setPort(int port)
+	public void setNodePort(int port)
 	{
-		_port = port;
+		_nodePort = port;
 	}
 	
-	public int getPort()
+	public int getNodePort()
 	{
-		return _port;
+		return _nodePort;
 	}
-	
 	@Override
 	public int getType() {
 		return _TYPE;
@@ -83,12 +82,12 @@ public class RegisterRequest implements Event
 		
 		dout.writeInt(_TYPE);
 		
-		byte[] ipBytes = _ip.getBytes();
+		byte[] ipBytes = _nodeIP.getBytes();
 		int elementLength = ipBytes.length;
 		dout.writeInt(elementLength);
 		dout.write(ipBytes);
 		
-		dout.writeInt(_port);
+		dout.writeInt(_nodePort);
 		
 		dout.flush();
 		marshalledBytes = baOutputStream.toByteArray();
@@ -98,11 +97,5 @@ public class RegisterRequest implements Event
 		
 		return marshalledBytes;
 	}
-
-    @Override
-    public String toString()
-    {
-        return "IP address: " + _ip + ", Port number: " + _port;
-    }
 
 }
