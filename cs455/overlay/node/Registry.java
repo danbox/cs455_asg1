@@ -3,6 +3,7 @@ package cs455.overlay.node;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Set;
@@ -146,6 +147,17 @@ public class Registry implements Node
 		for(String key : keys)
 		{
 			System.out.println(_connections.get(key).getName());
+		}
+	}
+	
+	public void setupOverlay()
+	{
+		ArrayList<Connection> connList = new ArrayList<Connection>(_connections.values());
+
+		//iteration 1
+		for(int i = 0; i < connList.size(); ++ i)
+		{
+			
 		}
 	}
 

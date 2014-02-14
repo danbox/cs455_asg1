@@ -72,7 +72,7 @@ public class MessagingNode implements Node
 			RegisterResponse registerResponse = (RegisterResponse)event;
 			if(registerResponse.getSuccess() != 0)
 			{
-				deregisterConnection(new Connection(this, socket));
+				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
 			}
 			System.out.println(registerResponse);
 			break;
@@ -80,9 +80,23 @@ public class MessagingNode implements Node
 			DeregisterResponse deregisterResponse = (DeregisterResponse)event;
 			if(deregisterResponse.getSuccess() == 0)
 			{
-				deregisterConnection(new Connection(this, socket));
+				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
 			}
 			System.out.println(deregisterResponse);
+			break;
+		case Protocol.LINK_REQUEST:
+			LinkRequest linkRequest = (LinkRequest)event;
+			try
+			{
+				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
+				Connection linkConnection = new Connection(this, linkSocket);
+				sendRegistrationRequest(linkConnection, linkSocket);
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+			
+			
 			break;
 		default:
 			System.out.println("Invalid event");	
@@ -155,6 +169,7 @@ public class MessagingNode implements Node
 			ioe.printStackTrace();
 		}
 		
+		node._server.start();
 		
 		Scanner in = new Scanner(System.in);
 		boolean quit = false;

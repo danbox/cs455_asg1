@@ -13,5 +13,6 @@ public class Protocol
 	public final static int TASK_INITIATE           = 5007;
 	public final static int TASK_SUMMARY_REQUEST    = 5008;	
 	public final static int TASK_SUMMARY_RESPONSE   = 5009;
-
+	public final static int LINK_REQUEST			= 5010;
+	public final static int LINK_RESPONSE			= 5011;
 }

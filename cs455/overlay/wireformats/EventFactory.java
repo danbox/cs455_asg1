@@ -42,6 +42,12 @@ public class EventFactory
 			case Protocol.DEREGISTER_RESPONSE:
 				System.out.println("Creating deregister response");
 				return new DeregisterResponse(data);
+			case Protocol.LINK_REQUEST:
+				System.out.println("Creating link request");
+				return new LinkRequest(data);
+			case Protocol.LINK_RESPONSE:
+				System.out.println("Creating link response");
+				return new LinkResponse(data);
 			case Protocol.LINK_WEIGHTS:
 				return new LinkWeights();
 			case Protocol.MESSAGE:
