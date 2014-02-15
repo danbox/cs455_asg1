@@ -95,7 +95,15 @@ public class MessagingNode implements Node
 			{
 				ioe.printStackTrace();
 			}
-			
+		case Protocol.REGISTER_REQUEST:
+			RegisterRequest registerRequest = (RegisterRequest)event;
+			try
+			{
+				validateRegistration(registerRequest, socket);
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
 			
 			break;
 		default:
@@ -137,6 +145,34 @@ public class MessagingNode implements Node
 		}
 	}
 	
+	private byte validateRegistration(RegisterRequest request, Socket socket) throws IOException
+	{
+		//success = 0, failure != 0
+		byte success;
+		String info = new String();
+		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
+		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
+		{
+			success = 0;
+			info = "Registration request successful";
+			//			registerConnection(connection);
+
+			//create register response
+
+		} else
+		{
+			success = 1;
+			deregisterConnection(connection);
+			info = "Registration request unsuccessful.  The request IP " + request.getIP() + " does not match source IP " + socket.getInetAddress().toString();
+		}
+//		RegisterResponse response = (RegisterResponse)EventFactory.createEvent(Protocol.REGISTER_RESPONSE);
+		RegisterResponse response = new RegisterResponse();
+		response.setSuccess(success);
+		response.setAdditionalInfo(info);
+		connection.sendData(response.getBytes());
+
+		return success;
+	}
 	public static void main(String[] args)
 	{
         MessagingNode node = new MessagingNode();

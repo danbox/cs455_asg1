@@ -154,9 +154,29 @@ public class Registry implements Node
 	{
 		ArrayList<Connection> connList = new ArrayList<Connection>(_connections.values());
 
-		//iteration 1
+		//first iteration
 		for(int i = 0; i < connList.size(); ++ i)
 		{
+			int destinationIndex;
+			if(i == connList.size() - 1) //if this is the last node
+			{
+				destinationIndex = 0; //sets to first node
+			}else
+			{
+				destinationIndex = i + 1;
+			}
+				
+			//create request
+			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
+			
+			//send data
+			try
+			{
+				connList.get(i).sendData(linkRequest.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
 			
 		}
 	}
@@ -204,6 +224,7 @@ public class Registry implements Node
 				break;
 			case "setup-overlay":
 				System.out.println("Sorry this isn't implemented yet...");
+				node.setupOverlay();
 				break;
 			case "send-overlay-link-weights":
 				System.out.println("Sorry this isn't implemented yet...");
