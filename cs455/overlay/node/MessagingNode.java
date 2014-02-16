@@ -201,7 +201,7 @@ public class MessagingNode implements Node
         MessagingNode node = new MessagingNode();
         Socket socket = null;
         Connection connection = null;
-        node.setPortNum(12321);
+        node.setPortNum(12322);
         if(args.length != 2) //invalid number of arguments
         {
             System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.MessagingNode <registry-host> <port-num>");

@@ -196,7 +196,7 @@ public class Registry implements Node
 			}
 
 			//create request
-			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12321);
+			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12322);
 
 			//send data
 			try
