@@ -201,6 +201,15 @@ public class MessagingNode implements Node
 	}
 	public static void main(String[] args)
 	{
+		//printing host name for debugging
+		try
+		{
+			System.out.println("I am " + InetAddress.getLocalHost().getCanonicalHostName());
+		}catch(UnknownHostException uhe)
+		{
+			uhe.printStackTrace();
+		}
+		
         MessagingNode node = new MessagingNode();
         Socket socket = null;
         Connection connection = null;
