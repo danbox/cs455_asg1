@@ -16,6 +16,7 @@ public class MessagingNode implements Node
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
     private String                          _registryHostName;
+    private int								_registryPortNum;
     private int                             _portnum;
     private String							_localHostAddress;
 	
@@ -55,6 +56,16 @@ public class MessagingNode implements Node
     public String getRegistryHostName()
     {
         return _registryHostName;
+    }
+    
+    public void setRegistryPortNum(int port)
+    {
+    	_registryPortNum = port;
+    }
+    
+    public int getRegistryPortNum()
+    {
+    	return _registryPortNum;
     }
     
     public boolean equals(MessagingNode node)
@@ -180,6 +191,7 @@ public class MessagingNode implements Node
         MessagingNode node = new MessagingNode();
         Socket socket = null;
         Connection connection = null;
+        node.setPortNum(0);
         if(args.length != 2) //invalid number of arguments
         {
             System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.MessagingNode <registry-host> <port-num>");
@@ -189,7 +201,7 @@ public class MessagingNode implements Node
             node.setRegistryHostName(args[0]);
             try
             {
-            	node.setPortNum(Integer.parseInt(args[1]));
+            	node.setRegistryPortNum(Integer.parseInt(args[1]));
 
             }catch(NumberFormatException nfe)
             {
@@ -198,8 +210,8 @@ public class MessagingNode implements Node
         }
 		try
 		{
-			System.out.println(node.getRegistryHostName() + node.getPortNum());
-			socket = new Socket(node.getRegistryHostName(), node.getPortNum());
+			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
+			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
 			connection = new Connection(node, socket);
 			node.sendRegistrationRequest(connection, socket);
 			
