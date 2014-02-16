@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import cs455.overlay.wireformats.*;
 import cs455.overlay.transport.*;
@@ -173,11 +174,15 @@ public class Registry implements Node
 			try
 			{
 				connList.get(i).sendData(linkRequest.getBytes());
+				TimeUnit.MILLISECONDS.sleep(10);
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();
+			}catch(InterruptedException ie)
+			{
+				ie.printStackTrace();
 			}
-
+			
 		}
 
 		//second iteration
