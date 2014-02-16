@@ -18,7 +18,7 @@ public class OverlayCreator
 
 	public OverlayCreator()
 	{
-
+		_graph = new Graph();
 	}
 
 	//sends link requests to all connected nodes to create overlay with random link weights
