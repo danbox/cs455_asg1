@@ -198,6 +198,7 @@ public class MessagingNode implements Node
         }
 		try
 		{
+			System.out.println(node.getRegistryHostName() + node.getPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getPortNum());
 			connection = new Connection(node, socket);
 			node.sendRegistrationRequest(connection, socket);
