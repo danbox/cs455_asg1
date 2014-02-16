@@ -83,6 +83,11 @@ public class OverlayCreator
 			int linkWeight = 1 + (int)Math.random() * 10;
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
 
+			//add edge to graph
+			Vertex source = _graph.getVertex(connList.get(i).getName());
+			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getName());
+			_graph.addEdge(new Edge(source, destination, linkWeight));
+			
 			//send data
 			try
 			{
