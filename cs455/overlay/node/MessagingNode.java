@@ -88,6 +88,7 @@ public class MessagingNode implements Node
 			LinkRequest linkRequest = (LinkRequest)event;
 			try
 			{
+				System.out.println(linkRequest.getIP() + linkRequest.getPort());
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
 				Connection linkConnection = new Connection(this, linkSocket);
 				sendRegistrationRequest(linkConnection, linkSocket);
