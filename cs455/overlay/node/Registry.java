@@ -11,13 +11,14 @@ import java.util.concurrent.TimeUnit;
 
 import cs455.overlay.wireformats.*;
 import cs455.overlay.transport.*;
+import cs455.overlay.util.OverlayCreator;
 
 public class Registry implements Node
 {
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
 	private int                             _portnum;
-	public final int						_NODE_PORT = 12322;
+
 
 	public Registry()
 	{
@@ -152,81 +153,10 @@ public class Registry implements Node
 		}
 	}
 
-	public void setupOverlay()
-	{
-		ArrayList<Connection> connList = new ArrayList<Connection>(_connections.values());
-
-		//first iteration
-		for(int i = 0; i < connList.size(); ++ i)
-		{
-			int destinationIndex;
-			if(i == connList.size() - 1) //if this is the last node
-			{
-				destinationIndex = 0; //sets to first node
-			}else
-			{
-				destinationIndex = i + 1;
-			}
-
-			//create request and specify random link weight
-			int linkWeight = (int)(1 + Math.random() * (10));
-			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
-
-			//send data
-			try
-			{
-				connList.get(i).sendData(linkRequest.getBytes());
-				TimeUnit.MILLISECONDS.sleep(20);
-			}catch(IOException ioe)
-			{
-				ioe.printStackTrace();
-			}catch(InterruptedException ie)
-			{
-				ie.printStackTrace();
-			}
-			
-		}
-
-		//second iteration
-		for(int i = 0; i < connList.size(); ++ i)
-		{
-			int destinationIndex;
-			if(i == connList.size() - 2) //if this is the second to last node
-			{
-				destinationIndex = 0;
-			}else if(i == connList.size() - 1) //if this is the last node
-			{
-				destinationIndex = 1; //sets to first node
-			}else
-			{
-				destinationIndex = i + 2;
-			}
-
-			//create request and specify random link weight
-			int linkWeight = 1 + (int)Math.random() * 10;
-			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
-			
-			//send data
-			try
-			{
-				connList.get(i).sendData(linkRequest.getBytes());
-			}catch(IOException ioe)
-			{
-				ioe.printStackTrace();
-			}
-
-		}
-	}
-	
-	public void assignLinkWeights()
-	{
-		
-	}
-
-
 	public static void main(String[] args)
 	{	
 		Registry node = new Registry();
+		OverlayCreator overlayCreator = new OverlayCreator();
 
 		//get port number
 		if(args.length != 1)
@@ -263,10 +193,11 @@ public class Registry implements Node
 				break;
 			case "list-weights":
 				System.out.println("Sorry this isn't implemented yet...");
+				overlayCreator.printGraph();
 				break;
 			case "setup-overlay":
 				System.out.println("Sorry this isn't implemented yet...");
-				node.setupOverlay();
+				overlayCreator.setupOverlay(node._connections);
 				break;
 			case "send-overlay-link-weights":
 				System.out.println("Sorry this isn't implemented yet...");
