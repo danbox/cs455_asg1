@@ -13,16 +13,18 @@ public class RegisterRequest implements Event
 	private final int 	_TYPE = Protocol.REGISTER_REQUEST;
 	private String 		_ip;
 	private int			_port;
+	private int			_linkWeight;
 	
 	public RegisterRequest()
 	{
 		_ip = new String();
 	}
 	
-	public RegisterRequest(String ip, int port)
+	public RegisterRequest(String ip, int port, int linkWeight)
 	{
 		_ip = ip;
 		_port = port;
+		_linkWeight = linkWeight;
 	}
 	
 	public RegisterRequest(byte[] marshalledBytes) throws IOException
@@ -44,6 +46,8 @@ public class RegisterRequest implements Event
 		_ip = new String(ipBytes);
 		
 		_port = din.readInt();
+		
+		_linkWeight = din.readInt();
 		
 		baInputStream.close();
 		din.close();
@@ -69,6 +73,16 @@ public class RegisterRequest implements Event
 		return _port;
 	}
 	
+	public void setLinkWeight(int linkWeight)
+	{
+		_linkWeight = linkWeight;
+	}
+	
+	public int getLinkWeight()
+	{
+		return _linkWeight;
+	}
+	
 	@Override
 	public int getType() {
 		return _TYPE;
@@ -90,6 +104,8 @@ public class RegisterRequest implements Event
 		
 		dout.writeInt(_port);
 		
+		dout.writeInt(_linkWeight);
+		
 		dout.flush();
 		marshalledBytes = baOutputStream.toByteArray();
 		
@@ -102,7 +118,7 @@ public class RegisterRequest implements Event
     @Override
     public String toString()
     {
-        return "IP address: " + _ip + ", Port number: " + _port;
+        return "IP address: " + _ip + ", Port number: " + _port + " Link weight : " + _linkWeight;
     }
 
 }

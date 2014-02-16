@@ -13,6 +13,7 @@ public class Connection {
 	private Node				_node;
 	private TCPReceiverThread	_receiver; 
 	private TCPSender			_sender;
+	private int					_linkWeight;
 	
 	public Connection(Node node, Socket socket) 
 	{
@@ -25,6 +26,7 @@ public class Connection {
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
 			_receiver.start(); //not sure where to put this?
+			_linkWeight = -1; //-1 means that a weight has not been specified
 			_node.registerConnection(this);
 		} catch(IOException ioe)
 		{
@@ -50,6 +52,16 @@ public class Connection {
 	public int getPort()
 	{
 		return _port;
+	}
+	
+	public int getLinkWeight()
+	{
+		return _linkWeight;
+	}
+	
+	public void setLinkWeight(int linkWeight)
+	{
+		_linkWeight = linkWeight;
 	}
 	
 	public boolean sendData(byte[] bytes)

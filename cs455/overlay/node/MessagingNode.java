@@ -103,7 +103,8 @@ public class MessagingNode implements Node
 				System.out.println(linkRequest.getIP() + linkRequest.getPort());
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
 				Connection linkConnection = new Connection(this, linkSocket);
-				sendRegistrationRequest(linkConnection, linkSocket);
+				linkConnection.setLinkWeight(linkRequest.getLinkWeight());
+				sendRegistrationRequest(linkConnection, linkSocket, linkConnection.getLinkWeight());
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();
@@ -135,9 +136,9 @@ public class MessagingNode implements Node
 		_connections.remove(connection.getName());
 	}
 	
-	private void sendRegistrationRequest(Connection connection, Socket socket)
+	private void sendRegistrationRequest(Connection connection, Socket socket, int linkWeight)
 	{
-		RegisterRequest request = new RegisterRequest(socket.getLocalAddress().toString(), socket.getLocalPort());
+		RegisterRequest request = new RegisterRequest(socket.getLocalAddress().toString(), socket.getLocalPort(), linkWeight);
 		try
 		{
 			connection.sendData(request.getBytes());
@@ -165,6 +166,7 @@ public class MessagingNode implements Node
 		byte success;
 		String info = new String();
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
+		connection.setLinkWeight(request.getLinkWeight());
 		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
 		{
 			success = 0;
@@ -194,7 +196,7 @@ public class MessagingNode implements Node
 		Set<String> keys = _connections.keySet();
 		for(String key : keys)
 		{
-			System.out.println(_connections.get(key).getName());
+			System.out.println(_connections.get(key).getName() + " " + _connections.get(key).getLinkWeight());
 		}
 	}
 	public static void main(String[] args)
@@ -221,10 +223,11 @@ public class MessagingNode implements Node
         }
 		try
 		{
+			//send registration request to registry
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
 			connection = new Connection(node, socket);
-			node.sendRegistrationRequest(connection, socket);
+			node.sendRegistrationRequest(connection, socket, -1); //-1 defines no link weight
 			
 		} catch(IOException ioe)
 		{

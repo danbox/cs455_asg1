@@ -17,6 +17,7 @@ public class Registry implements Node
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
 	private int                             _portnum;
+	public final int						_NODE_PORT = 12322;
 
 	public Registry()
 	{
@@ -167,14 +168,15 @@ public class Registry implements Node
 				destinationIndex = i + 1;
 			}
 
-			//create request
-			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12322);
+			//create request and specify random link weight
+			int linkWeight = 1 + (int)Math.random() * 10;
+			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
 
 			//send data
 			try
 			{
 				connList.get(i).sendData(linkRequest.getBytes());
-				TimeUnit.MILLISECONDS.sleep(10);
+				TimeUnit.MILLISECONDS.sleep(20);
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();
@@ -200,9 +202,10 @@ public class Registry implements Node
 				destinationIndex = i + 2;
 			}
 
-			//create request
-			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12322);
-
+			//create request and specify random link weight
+			int linkWeight = 1 + (int)Math.random() * 10;
+			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
+			
 			//send data
 			try
 			{
@@ -213,6 +216,11 @@ public class Registry implements Node
 			}
 
 		}
+	}
+	
+	public void assignLinkWeights()
+	{
+		
 	}
 
 

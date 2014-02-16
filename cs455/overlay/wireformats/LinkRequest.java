@@ -13,16 +13,18 @@ public class LinkRequest implements Event
 	private final int 	_TYPE = Protocol.LINK_REQUEST;
 	private String 		_ip;
 	private int			_port;
+	private int			_weight;
 	
 	public LinkRequest()
 	{
 		_ip = new String();
 	}
 	
-	public LinkRequest(String ip, int port)
+	public LinkRequest(String ip, int port, int weight)
 	{
 		_ip = ip;
 		_port = port;
+		_weight = weight;
 	}
 	
 	public LinkRequest(byte[] marshalledBytes) throws IOException
@@ -44,6 +46,8 @@ public class LinkRequest implements Event
 		_ip = new String(ipBytes);
 		
 		_port = din.readInt();
+		
+		_weight = din.readInt();
 		
 		baInputStream.close();
 		din.close();
@@ -67,6 +71,16 @@ public class LinkRequest implements Event
 	public int getPort()
 	{
 		return _port;
+	}
+	
+	public void setLinkWeight(int weight)
+	{
+		_weight = weight;
+	}
+	
+	public int getLinkWeight()
+	{
+		return _weight;
 	}
 	
 	@Override
