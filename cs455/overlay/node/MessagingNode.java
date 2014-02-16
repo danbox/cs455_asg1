@@ -95,6 +95,7 @@ public class MessagingNode implements Node
 			{
 				ioe.printStackTrace();
 			}
+			break;
 		case Protocol.REGISTER_REQUEST:
 			RegisterRequest registerRequest = (RegisterRequest)event;
 			try
