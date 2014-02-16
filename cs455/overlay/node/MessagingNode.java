@@ -183,6 +183,7 @@ public class MessagingNode implements Node
 		RegisterResponse response = new RegisterResponse();
 		response.setSuccess(success);
 		response.setAdditionalInfo(info);
+		System.out.println("In messaging node: " + connection);
 		connection.sendData(response.getBytes());
 
 		return success;
