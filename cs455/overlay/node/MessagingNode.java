@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.Set;
 
 import cs455.overlay.transport.*;
 import cs455.overlay.wireformats.*;
@@ -186,6 +187,15 @@ public class MessagingNode implements Node
 
 		return success;
 	}
+	
+	public void listConnections()
+	{
+		Set<String> keys = _connections.keySet();
+		for(String key : keys)
+		{
+			System.out.println(_connections.get(key).getName());
+		}
+	}
 	public static void main(String[] args)
 	{
         MessagingNode node = new MessagingNode();
@@ -244,6 +254,10 @@ public class MessagingNode implements Node
 						+ "\texit-overlay: allows messaging node to exit the overlay\n"
 						+ "\thelp: prints help message\n"
 						+ "\tquit: ends the messaging node");
+				break;
+			case "list-connections":
+				node.listConnections();
+				break;
 			case "quit":
 				quit = true;
 				break;
