@@ -179,6 +179,35 @@ public class Registry implements Node
 			}
 			
 		}
+		
+		//second iteration
+				for(int i = 0; i < connList.size(); ++ i)
+				{
+					int destinationIndex;
+					if(i == connList.size() - 2) //if this is the second to last node
+					{
+						destinationIndex = 0;
+					}else if(i == connList.size() - 1) //if this is the last node
+					{
+						destinationIndex = 1; //sets to first node
+					}else
+					{
+						destinationIndex = i + 1;
+					}
+						
+					//create request
+					LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12321);
+					
+					//send data
+					try
+					{
+						connList.get(i).sendData(linkRequest.getBytes());
+					}catch(IOException ioe)
+					{
+						ioe.printStackTrace();
+					}
+					
+				}
 	}
 
 
