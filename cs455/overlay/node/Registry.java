@@ -106,7 +106,7 @@ public class Registry implements Node
 			deregisterConnection(connection);
 			info = "Registration request unsuccessful.  The request IP " + request.getIP() + " does not match source IP " + socket.getInetAddress().toString();
 		}
-//		RegisterResponse response = (RegisterResponse)EventFactory.createEvent(Protocol.REGISTER_RESPONSE);
+		//		RegisterResponse response = (RegisterResponse)EventFactory.createEvent(Protocol.REGISTER_RESPONSE);
 		RegisterResponse response = new RegisterResponse();
 		response.setSuccess(success);
 		response.setAdditionalInfo(info);
@@ -132,7 +132,7 @@ public class Registry implements Node
 			success = 1;
 			info = "Deregistration request unsuccessful.  The request IP " + request.getNodeIP() + " does not match source IP " + socket.getInetAddress().toString();
 		}
-//		DeregisterResponse response = (DeregisterResponse)EventFactory.createEvent(Protocol.DEREGISTER_RESPONSE);
+		//		DeregisterResponse response = (DeregisterResponse)EventFactory.createEvent(Protocol.DEREGISTER_RESPONSE);
 		DeregisterResponse response = new DeregisterResponse();
 		response.setSuccess(success);
 		response.setAdditionalInfo(info);
@@ -140,7 +140,7 @@ public class Registry implements Node
 
 		return success;
 	}
-	
+
 	public void listMessagingNodes()
 	{
 		Set<String> keys = _connections.keySet();
@@ -149,7 +149,7 @@ public class Registry implements Node
 			System.out.println(_connections.get(key).getName());
 		}
 	}
-	
+
 	public void setupOverlay()
 	{
 		ArrayList<Connection> connList = new ArrayList<Connection>(_connections.values());
@@ -165,10 +165,10 @@ public class Registry implements Node
 			{
 				destinationIndex = i + 1;
 			}
-				
+
 			//create request
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12321);
-			
+
 			//send data
 			try
 			{
@@ -177,37 +177,37 @@ public class Registry implements Node
 			{
 				ioe.printStackTrace();
 			}
-			
+
 		}
-		
+
 		//second iteration
-				for(int i = 0; i < connList.size(); ++ i)
-				{
-					int destinationIndex;
-					if(i == connList.size() - 2) //if this is the second to last node
-					{
-						destinationIndex = 0;
-					}else if(i == connList.size() - 1) //if this is the last node
-					{
-						destinationIndex = 1; //sets to first node
-					}else
-					{
-						destinationIndex = i + 1;
-					}
-						
-					//create request
-					LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12321);
-					
-					//send data
-					try
-					{
-						connList.get(i).sendData(linkRequest.getBytes());
-					}catch(IOException ioe)
-					{
-						ioe.printStackTrace();
-					}
-					
-				}
+		for(int i = 0; i < connList.size(); ++ i)
+		{
+			int destinationIndex;
+			if(i == connList.size() - 2) //if this is the second to last node
+			{
+				destinationIndex = 0;
+			}else if(i == connList.size() - 1) //if this is the last node
+			{
+				destinationIndex = 1; //sets to first node
+			}else
+			{
+				destinationIndex = i + 2;
+			}
+
+			//create request
+			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), 12321);
+
+			//send data
+			try
+			{
+				connList.get(i).sendData(linkRequest.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+
+		}
 	}
 
 
@@ -241,7 +241,7 @@ public class Registry implements Node
 		{
 			System.out.println("Awaiting input... Type help for help message");
 			String command = in.next();
-			
+
 			switch(command.toLowerCase())
 			{
 			case "list-messaging-nodes":
@@ -279,7 +279,7 @@ public class Registry implements Node
 			}
 		}
 		in.close();
-		
+
 	}
 
 }
