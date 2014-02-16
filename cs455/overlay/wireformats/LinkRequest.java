@@ -104,6 +104,8 @@ public class LinkRequest implements Event
 		
 		dout.writeInt(_port);
 		
+		dout.writeInt(_weight);
+		
 		dout.flush();
 		marshalledBytes = baOutputStream.toByteArray();
 		
