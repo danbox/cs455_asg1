@@ -26,4 +26,9 @@ public class Vertex {
 	{
 		return _ip + ":" + _port;
 	}
+	
+	public boolean equals(Vertex vertex)
+	{
+		return (_ip.equals(vertex.getIP()) && _port == vertex.getPort());
+	}
 }

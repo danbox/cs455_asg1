@@ -82,7 +82,7 @@ public class OverlayCreator
 			}
 
 			//create request and specify random link weight
-			int linkWeight = 1 + (int)Math.random() * 10;
+			int linkWeight = (int)(1 + Math.random() * (10));
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
 
 			//add edge to graph

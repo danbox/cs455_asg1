@@ -130,7 +130,9 @@ public class MessagingNode implements Node
 			
 		case Protocol.LINK_WEIGHTS:
 			System.out.println("Link Weights received");
-			_routingCache.buildCache(event);
+			LinkWeights linkWeights = (LinkWeights)event;
+			_routingCache.buildGraph(linkWeights);
+			_routingCache.buildShortestPaths(this);
 			break;
 		
 		default:
