@@ -96,7 +96,7 @@ public class Registry implements Node
 		byte success;
 		String info = new String();
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
-		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
+		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
 			info = "Registration request successful.  The number of messaging nodes currently constituting the overlay is: " + _connections.size();
