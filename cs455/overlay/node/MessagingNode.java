@@ -110,7 +110,7 @@ public class MessagingNode implements Node
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
 				Connection linkConnection = new Connection(this, linkSocket);
 				linkConnection.setLinkWeight(linkRequest.getLinkWeight());
-				sendRegistrationRequest(linkConnection, linkSocket, linkConnection.getLinkWeight());
+				sendRegistrationRequest(linkConnection, linkConnection.getLinkWeight());
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();
@@ -151,9 +151,9 @@ public class MessagingNode implements Node
 		_connections.remove(connection.getName());
 	}
 	
-	private void sendRegistrationRequest(Connection connection, Socket socket, int linkWeight)
+	private void sendRegistrationRequest(Connection connection, int linkWeight)
 	{
-		RegisterRequest request = new RegisterRequest(socket.getLocalAddress().toString(), socket.getLocalPort(), linkWeight);
+		RegisterRequest request = new RegisterRequest(_localHostAddress, _portnum, linkWeight);
 		try
 		{
 			connection.sendData(request.getBytes());
@@ -163,9 +163,9 @@ public class MessagingNode implements Node
 		}
 	}
 	
-	private void sendDeregistrationRequest(Connection connection, Socket socket)
+	private void sendDeregistrationRequest(Connection connection)
 	{
-		DeregisterRequest request = new DeregisterRequest(socket.getLocalAddress().toString(), socket.getLocalPort());
+		DeregisterRequest request = new DeregisterRequest(_localHostAddress, _portnum);
 		try
 		{
 			connection.sendData(request.getBytes());
@@ -226,8 +226,10 @@ public class MessagingNode implements Node
 		}
 		
         MessagingNode node = new MessagingNode();
+        node._server.start();
         Socket socket = null;
         Connection connection = null;
+        
 //        node.setPortNum(12322);
         if(args.length != 2) //invalid number of arguments
         {
@@ -251,14 +253,14 @@ public class MessagingNode implements Node
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
 			connection = new Connection(node, socket);
-			node.sendRegistrationRequest(connection, socket, -1); //-1 defines no link weight
+			node.sendRegistrationRequest(connection, -1); //-1 defines no link weight
 			
 		} catch(IOException ioe)
 		{
 			ioe.printStackTrace();
 		}
 		
-		node._server.start();
+		
 		
 		Scanner in = new Scanner(System.in);
 		boolean quit = false;
@@ -275,7 +277,7 @@ public class MessagingNode implements Node
 				
 			case "exit-overlay":
 				System.out.println("Sorry this isn't implemented yet...");
-				node.sendDeregistrationRequest(connection, socket);
+				node.sendDeregistrationRequest(connection);
 				break;
 				
 			case "help":
