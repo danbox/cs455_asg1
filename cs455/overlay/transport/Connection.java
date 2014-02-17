@@ -27,8 +27,8 @@ public class Connection {
 			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
 			_localPort = socket.getLocalPort();
-			_listeningPort = _node.getPortNum();
 			_node = node;
+			_listeningPort = _node.getPortNum();
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
 			_receiver.start(); //not sure where to put this?
