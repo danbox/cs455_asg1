@@ -17,6 +17,7 @@ public class RoutingCache
 	public void buildCache(Event event)
 	{
 		LinkWeights linkWeights = (LinkWeights)event;
+		System.out.println(linkWeights);
 		for(LinkInfo linkInfo : linkWeights.getLinks())
 		{
 			Vertex source = new Vertex(linkInfo.get_sourceIP(), linkInfo.get_sourcePort());
