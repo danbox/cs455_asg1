@@ -130,7 +130,7 @@ public class Registry implements Node
 		String info = new String();
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort());
 		
-		if(request.getNodeIP().equals(socket.getInetAddress().toString())) //valid ip address in request
+		if(request.getNodeIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
 			deregisterConnection(connection);
@@ -139,7 +139,7 @@ public class Registry implements Node
 		} else
 		{
 			success = 1;
-			info = "Deregistration request unsuccessful.  The request IP " + request.getNodeIP() + " does not match source IP " + socket.getInetAddress().toString();
+			info = "Deregistration request unsuccessful.  The request IP " + request.getNodeIP() + " does not match source IP " + socket.getInetAddress().getCanonicalHostName();
 		}
 		//		DeregisterResponse response = (DeregisterResponse)EventFactory.createEvent(Protocol.DEREGISTER_RESPONSE);
 		DeregisterResponse response = new DeregisterResponse();

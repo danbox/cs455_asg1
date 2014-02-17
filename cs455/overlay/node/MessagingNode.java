@@ -184,7 +184,7 @@ public class MessagingNode implements Node
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort());
 		
 		connection.setLinkWeight(request.getLinkWeight());
-		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
+		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
 			info = "Registration request successful";
@@ -196,7 +196,7 @@ public class MessagingNode implements Node
 		{
 			success = 1;
 			deregisterConnection(connection);
-			info = "Registration request unsuccessful.  The request IP " + request.getIP() + " does not match source IP " + socket.getInetAddress().toString();
+			info = "Registration request unsuccessful.  The request IP " + request.getIP() + " does not match source IP " + socket.getInetAddress().getCanonicalHostName();
 		}
 //		RegisterResponse response = (RegisterResponse)EventFactory.createEvent(Protocol.REGISTER_RESPONSE);
 		RegisterResponse response = new RegisterResponse();
