@@ -20,7 +20,6 @@ public class MessagingNode implements Node
     private String                          _registryHostName;
     private int								_registryPortNum;
     private int                             _portnum;
-    private int								_listeningPort;
     private String							_localHostAddress;
     private RoutingCache					_routingCache;
 	
@@ -29,6 +28,7 @@ public class MessagingNode implements Node
 		_server = new TCPServerThread(this);
 		_connections = new Hashtable<String, Connection>();
 		_routingCache = new RoutingCache();
+		_portnum = 0;
 		try
 		{
 			_localHostAddress = InetAddress.getLocalHost().getCanonicalHostName();
@@ -46,16 +46,6 @@ public class MessagingNode implements Node
     public void setPortNum(int port)
     {
         _portnum = port;
-    }
-    
-    public void setListeningPort(int port)
-    {
-    	_listeningPort = port;
-    }
-    
-    public int getListeningPort()
-    {
-    	return _listeningPort;
     }
     
     public int getPortNum()
@@ -238,7 +228,7 @@ public class MessagingNode implements Node
         MessagingNode node = new MessagingNode();
         Socket socket = null;
         Connection connection = null;
-        node.setPortNum(12322);
+//        node.setPortNum(12322);
         if(args.length != 2) //invalid number of arguments
         {
             System.out.println("Invalid arguments\nUsage: java cs455.overlay.node.MessagingNode <registry-host> <port-num>");
@@ -261,7 +251,6 @@ public class MessagingNode implements Node
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
 			connection = new Connection(node, socket);
-			node.setListeningPort(connection.getPort());
 			node.sendRegistrationRequest(connection, socket, -1); //-1 defines no link weight
 			
 		} catch(IOException ioe)

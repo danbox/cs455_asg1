@@ -10,6 +10,8 @@ public interface Node
 	
 	public int getPortNum();
 	
+	public void setPortNum(int port);
+	
 	public void registerConnection(Connection connection);
 	
 	public void deregisterConnection(Connection connection);

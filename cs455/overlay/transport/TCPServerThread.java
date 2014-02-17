@@ -25,7 +25,8 @@ public class TCPServerThread extends Thread
 		try
 		{
 			ServerSocket ss = new ServerSocket(_node.getPortNum()); //how to close?
-
+			_node.setPortNum(ss.getLocalPort());
+			
 			while(true)
 			{
 				System.out.println("Inside Server Thread loop");

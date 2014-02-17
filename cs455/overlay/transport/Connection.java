@@ -9,7 +9,9 @@ public class Connection {
 	
 	private String				_name;
 	private String				_ip;
+	private String				_localIP;
 	private int					_port;
+	private int					_localPort;
 	private Node				_node;
 	private TCPReceiverThread	_receiver; 
 	private TCPSender			_sender;
@@ -19,9 +21,11 @@ public class Connection {
 	{
 		try
 		{
-			_name = socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort();
+			_name = socket.getInetAddress().getCanonicalHostName() + " : " + socket.getLocalPort();
 			_ip = socket.getInetAddress().getCanonicalHostName();
+			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
+			_localPort = socket.getLocalPort();
 			_node = node;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
@@ -49,9 +53,19 @@ public class Connection {
 		return _ip;
 	}
 	
+	public String getLocalIP()
+	{
+		return _localIP;
+	}
+	
 	public int getPort()
 	{
 		return _port;
+	}
+	
+	public int getLocalPort()
+	{
+		return _localPort;
 	}
 	
 	public int getLinkWeight()
