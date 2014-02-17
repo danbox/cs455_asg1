@@ -12,6 +12,7 @@ public class Connection {
 	private String				_localIP;
 	private int					_port;
 	private int					_localPort;
+	private int					_listeningPort;
 	private Node				_node;
 	private TCPReceiverThread	_receiver; 
 	private TCPSender			_sender;
@@ -26,6 +27,7 @@ public class Connection {
 			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
 			_localPort = socket.getLocalPort();
+			_listeningPort = _node.getPortNum();
 			_node = node;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
@@ -66,6 +68,11 @@ public class Connection {
 	public int getLocalPort()
 	{
 		return _localPort;
+	}
+	
+	public int getListeningPort()
+	{
+		return _listeningPort;
 	}
 	
 	public int getLinkWeight()
