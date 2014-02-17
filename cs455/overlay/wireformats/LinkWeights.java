@@ -41,6 +41,7 @@ public class LinkWeights implements Event
 		
         _linkCount = din.readInt();
         
+        _links = new ArrayList<LinkInfo>();
         for(int i = 0; i < _linkCount; ++i)
         {
         	int sourceIPLength = din.readInt();
