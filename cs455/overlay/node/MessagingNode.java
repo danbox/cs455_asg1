@@ -30,7 +30,7 @@ public class MessagingNode implements Node
 		_routingCache = new RoutingCache();
 		try
 		{
-			_localHostAddress = InetAddress.getLocalHost().getHostAddress();
+			_localHostAddress = InetAddress.getLocalHost().getCanonicalHostName();
 		}catch(UnknownHostException uhe)
 		{
 			uhe.printStackTrace();
