@@ -134,6 +134,7 @@ public class LinkWeights implements Event
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Number of links: ");
         stringBuilder.append(_linkCount);
+        stringBuilder.append("\n");
         for(LinkInfo linkInfo : _links)
         {
         	stringBuilder.append(linkInfo);

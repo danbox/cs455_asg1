@@ -17,7 +17,9 @@ public class LinkInfo {
 	public LinkInfo(String sourceIP, int sourcePort, String destinationIP, int destinationPort, int weight)
 	{
 		_sourceIP = sourceIP;
+		_sourcePort = sourcePort;
 		_destinationIP = destinationIP;
+		_destinationPort = destinationPort;
 		_weight = weight;
 	}
 
@@ -82,6 +84,7 @@ public class LinkInfo {
 		stringBuilder.append(_destinationIP);
 		stringBuilder.append(":");
 		stringBuilder.append(_destinationPort);
+		stringBuilder.append(_weight);
 		return stringBuilder.toString();
 	}
 	
