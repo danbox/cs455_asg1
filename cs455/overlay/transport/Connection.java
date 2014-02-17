@@ -109,7 +109,7 @@ public class Connection {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(_ip);
 		stringBuilder.append(":");
-		stringBuilder.append(_port);
+		stringBuilder.append(_listeningPort);
 		stringBuilder.append(" ");
 		stringBuilder.append(_linkWeight);
 		return stringBuilder.toString();
