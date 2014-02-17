@@ -95,6 +95,7 @@ public class Registry implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
+		System.out.println(request);
 		Connection connection = _connections.get(request.getIP() + ":" + request.getPort());
 		
 		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
