@@ -76,15 +76,17 @@ public class Graph {
 	
 	public boolean hasVertex(Vertex vertex)
 	{
-		boolean found = false;
-		for(Vertex v : _vertices)
-		{
-			if(v.equals(vertex))
-			{
-				found = true;
-			}
-		}
-		return found;
+//		boolean found = false;
+//		for(Vertex v : _vertices)
+//		{
+//			if(v.equals(vertex))
+//			{
+//				found = true;
+//			}
+//		}
+//		return found;
+		
+		return hasVertex(vertex.getIP(), vertex.getPort());
 	}
 	
 	public boolean hasVertex(String ip, int port)
