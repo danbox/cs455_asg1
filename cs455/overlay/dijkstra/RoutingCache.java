@@ -41,6 +41,8 @@ public class RoutingCache
 	public void buildShortestPaths(MessagingNode node)
 	{
 		ShortestPath shortestPath = new ShortestPath(_graph);
+		System.out.println("Listening port: " + node.getListeningPort());
+		System.out.println(_graph.getVertex(node.getLocalHostAddress(), node.getListeningPort()));
 		shortestPath.getShortestPaths(_graph.getVertex(node.getLocalHostAddress(), node.getListeningPort()));
 		for(Vertex destination : _graph.getVertices())
 		{
