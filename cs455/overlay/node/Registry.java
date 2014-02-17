@@ -208,7 +208,7 @@ public class Registry implements Node
 				break;
 				
 			case "list-weights":
-				overlayCreator.printGraph();
+				System.out.println(overlayCreator);
 				break;
 				
 			case "setup-overlay":

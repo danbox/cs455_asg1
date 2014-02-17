@@ -112,11 +112,6 @@ public class OverlayCreator
 		}
 	}
 	
-	public void printGraph()
-	{
-		System.out.println(_graph);
-	}
-	
 	public LinkWeights generateLinkWeightMessage()
 	{
 		List<LinkInfo> infoList = new ArrayList<LinkInfo>();
@@ -126,7 +121,14 @@ public class OverlayCreator
 			Vertex destination = edge.getDestination();
 			infoList.add(new LinkInfo(source.getIP(), source.getPort(), destination.getIP(), destination.getPort(), edge.getWeight()));
 		}
-		
-		return new LinkWeights(infoList.size(), infoList);
+		LinkWeights linkWeights = new LinkWeights(infoList.size(), infoList);
+		System.out.println(linkWeights);
+		return linkWeights;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return _graph.toString();
 	}
 }
