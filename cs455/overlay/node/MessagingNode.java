@@ -20,6 +20,7 @@ public class MessagingNode implements Node
     private String                          _registryHostName;
     private int								_registryPortNum;
     private int                             _portnum;
+    private int								_listeningPort;
     private String							_localHostAddress;
     private RoutingCache					_routingCache;
 	
@@ -46,7 +47,17 @@ public class MessagingNode implements Node
     {
         _portnum = port;
     }
-
+    
+    public void setListeningPort(int port)
+    {
+    	_listeningPort = port;
+    }
+    
+    public int getListeningPort()
+    {
+    	return _listeningPort;
+    }
+    
     public int getPortNum()
     {
         return _portnum;
@@ -142,6 +153,7 @@ public class MessagingNode implements Node
 	
 	public synchronized void registerConnection(Connection connection)
 	{
+		setListeningPort(connection.getPort());
 		_connections.put(connection.getName(), connection);
 	}
 	
