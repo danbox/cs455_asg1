@@ -84,6 +84,7 @@ public class LinkInfo {
 		stringBuilder.append(_destinationIP);
 		stringBuilder.append(":");
 		stringBuilder.append(_destinationPort);
+		stringBuilder.append(" ");
 		stringBuilder.append(_weight);
 		return stringBuilder.toString();
 	}

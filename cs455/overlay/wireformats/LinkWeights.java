@@ -100,6 +100,8 @@ public class LinkWeights implements Event
 		
 		dout.writeInt(_TYPE);
 		
+		dout.writeInt(_links.size());
+		
 		for(LinkInfo linkInfo : _links)
 		{
 			byte[] sourceIPBytes = linkInfo.get_sourceIP().getBytes();
