@@ -21,7 +21,7 @@ public class Connection {
 	{
 		try
 		{
-			_name = socket.getInetAddress().getCanonicalHostName() + " : " + socket.getLocalPort();
+			_name = socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort();
 			_ip = socket.getInetAddress().getCanonicalHostName();
 			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
