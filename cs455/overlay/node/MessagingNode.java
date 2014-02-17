@@ -153,7 +153,6 @@ public class MessagingNode implements Node
 	
 	public synchronized void registerConnection(Connection connection)
 	{
-		setListeningPort(connection.getPort());
 		_connections.put(connection.getName(), connection);
 	}
 	
@@ -262,6 +261,7 @@ public class MessagingNode implements Node
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
 			connection = new Connection(node, socket);
+			node.setListeningPort(connection.getPort());
 			node.sendRegistrationRequest(connection, socket, -1); //-1 defines no link weight
 			
 		} catch(IOException ioe)
