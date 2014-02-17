@@ -129,6 +129,7 @@ public class MessagingNode implements Node
 			break;
 			
 		case Protocol.LINK_WEIGHTS:
+			System.out.println("Link Weights received");
 			_routingCache.buildCache(event);
 			break;
 		
