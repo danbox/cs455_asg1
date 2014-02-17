@@ -287,6 +287,7 @@ public class MessagingNode implements Node
 				break;
 			case "print-cache":
 				System.out.println(node._routingCache);
+				break;
 			case "quit":
 				quit = true;
 				break;
