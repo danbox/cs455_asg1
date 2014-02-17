@@ -88,7 +88,7 @@ public class MessagingNode implements Node
 			RegisterResponse registerResponse = (RegisterResponse)event;
 			if(registerResponse.getSuccess() != 0)
 			{
-				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
+//				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
 			}
 			System.out.println(registerResponse);
 			break;
@@ -97,7 +97,7 @@ public class MessagingNode implements Node
 			DeregisterResponse deregisterResponse = (DeregisterResponse)event;
 			if(deregisterResponse.getSuccess() == 0)
 			{
-				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
+//				deregisterConnection(new Connection(this, socket)); //TODO: fix new connection
 			}
 			System.out.println(deregisterResponse);
 			break;
@@ -108,7 +108,7 @@ public class MessagingNode implements Node
 			{
 				System.out.println(linkRequest.getIP() + linkRequest.getPort());
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
-				Connection linkConnection = new Connection(this, linkSocket);
+				Connection linkConnection = new Connection(this, linkSocket, linkRequest.getPort());
 				linkConnection.setLinkWeight(linkRequest.getLinkWeight());
 				sendRegistrationRequest(linkConnection, linkConnection.getLinkWeight());
 			}catch(IOException ioe)
@@ -253,7 +253,7 @@ public class MessagingNode implements Node
 			//send registration request to registry
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
-			connection = new Connection(node, socket);
+			connection = new Connection(node, socket, node.getRegistryPortNum());
 			node.sendRegistrationRequest(connection, -1); //-1 defines no link weight
 			
 		} catch(IOException ioe)

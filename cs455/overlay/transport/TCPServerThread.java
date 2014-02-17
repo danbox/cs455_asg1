@@ -31,7 +31,7 @@ public class TCPServerThread extends Thread
 			{
 				System.out.println("Inside Server Thread loop");
 				Socket socket = ss.accept();
-				new Connection(_node, socket);
+				new Connection(_node, socket, _node.getPortNum());
 				
 				
 				

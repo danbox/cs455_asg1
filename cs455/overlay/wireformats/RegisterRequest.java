@@ -118,7 +118,7 @@ public class RegisterRequest implements Event
     @Override
     public String toString()
     {
-        return "IP address: " + _ip + ", Port number: " + _port + " Link weight : " + _linkWeight;
+        return "IP address: " + _ip + " Port number: " + _port + " Link weight : " + _linkWeight;
     }
 
 }
