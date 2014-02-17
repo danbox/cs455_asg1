@@ -213,6 +213,7 @@ public class ShortestPath
 		edges.add(edge4);
 		
 		Graph graph = new Graph(vertices, edges);
+		System.out.println(graph.hasVertex(new Vertex("1", 2)));
 		ShortestPath shortestPath = new ShortestPath(graph);
 		Hashtable<Vertex, Integer> paths = shortestPath.getShortestPaths(vertex4);
 		
