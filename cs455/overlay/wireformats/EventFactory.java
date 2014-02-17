@@ -49,7 +49,7 @@ public class EventFactory
 				System.out.println("Creating link response");
 				return new LinkResponse(data);
 			case Protocol.LINK_WEIGHTS:
-				return new LinkWeights();
+				return new LinkWeights(data);
 			case Protocol.MESSAGE:
 				return new Message();
 			case Protocol.REGISTER_RESPONSE:
