@@ -110,7 +110,7 @@ public class MessagingNode implements Node
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
 				Connection linkConnection = new Connection(this, linkSocket);
 				linkConnection.setLinkWeight(linkRequest.getLinkWeight());
-				linkConnection.setListeningPort(_portnum);
+				linkConnection.setListeningPort(linkRequest.getPort());
 				sendRegistrationRequest(linkConnection, linkConnection.getLinkWeight());
 			}catch(IOException ioe)
 			{
