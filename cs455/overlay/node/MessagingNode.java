@@ -184,6 +184,7 @@ public class MessagingNode implements Node
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort());
 		
 		connection.setLinkWeight(request.getLinkWeight());
+		connection.setListeningPort(request.getPort());
 		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
