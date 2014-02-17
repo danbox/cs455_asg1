@@ -18,7 +18,7 @@ public class Connection {
 	private TCPSender			_sender;
 	private int					_linkWeight;
 	
-	public Connection(Node node, Socket socket, int listeningPort) 
+	public Connection(Node node, Socket socket) 
 	{
 		try
 		{
@@ -26,15 +26,15 @@ public class Connection {
 			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
 			_localPort = socket.getLocalPort();
+			_name = _ip + ":" + _port;
 			_node = node;
-			_listeningPort = listeningPort;
-			_name = _ip + ":" + _listeningPort;
+			_listeningPort = 0;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
 			_receiver.start(); //not sure where to put this?
 			_linkWeight = -1; //-1 means that a weight has not been specified
 			_node.registerConnection(this);
-			System.out.println(_port + " " + _localPort + " " + _listeningPort);
+//			System.out.println(_port + " " + _localPort + " " + _listeningPort);
 		} catch(IOException ioe)
 		{
 			ioe.printStackTrace();
@@ -71,6 +71,11 @@ public class Connection {
 		return _localPort;
 	}
 	
+	public void setListeningPort(int port)
+	{
+		_listeningPort = port;
+	}
+	
 	public int getListeningPort()
 	{
 		return _listeningPort;
@@ -96,6 +101,18 @@ public class Connection {
 			ioe.printStackTrace();
 		} 
 		return true;
+	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(_ip);
+		stringBuilder.append(":");
+		stringBuilder.append(_port);
+		stringBuilder.append(" ");
+		stringBuilder.append(_linkWeight);
+		return stringBuilder.toString();
 	}
 
 }
