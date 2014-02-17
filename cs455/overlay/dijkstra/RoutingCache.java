@@ -55,8 +55,14 @@ public class RoutingCache
 	public String toString()
 	{
 		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Nodes: \n");
+		for(Vertex node : _graph.getVertices())
+		{
+			stringBuilder.append(node + "\n");
+		}
+		stringBuilder.append("Edges: \n");
 		stringBuilder.append(_graph);
-		stringBuilder.append("Shortest Paths\n");
+		stringBuilder.append("Shortest Paths: \n");
 		for(Vertex destination : _shortestPaths.keySet())
 		{
 			stringBuilder.append("To: " + destination + "\n");
