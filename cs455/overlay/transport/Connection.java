@@ -22,13 +22,13 @@ public class Connection {
 	{
 		try
 		{
-			_name = socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort();
 			_ip = socket.getInetAddress().getCanonicalHostName();
 			_localIP = socket.getLocalAddress().getCanonicalHostName();
 			_port = socket.getPort();
 			_localPort = socket.getLocalPort();
 			_node = node;
 			_listeningPort = _node.getPortNum();
+			_name = _ip + ":" + _listeningPort;
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
 			_receiver.start(); //not sure where to put this?

@@ -180,7 +180,8 @@ public class MessagingNode implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
-		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
+		Connection connection = _connections.get(request.getIP() + ":" + request.getPort());
+		
 		connection.setLinkWeight(request.getLinkWeight());
 		if(request.getIP().equals(socket.getInetAddress().toString())) //valid ip address in request
 		{

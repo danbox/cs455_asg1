@@ -25,6 +25,16 @@ public class DeregisterRequest implements Event
 		_nodePort = port;
 	}
 	
+	public String getIP()
+	{
+		return _nodeIP;
+	}
+	
+	public int getPort()
+	{
+		return _nodePort;
+	}
+	
 	public DeregisterRequest(byte[] marshalledBytes) throws IOException
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);

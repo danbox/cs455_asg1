@@ -95,7 +95,8 @@ public class Registry implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
-		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getPort());
+		Connection connection = _connections.get(request.getIP() + ":" + request.getPort());
+		
 		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
@@ -114,6 +115,7 @@ public class Registry implements Node
 		RegisterResponse response = new RegisterResponse();
 		response.setSuccess(success);
 		response.setAdditionalInfo(info);
+		
 		connection.sendData(response.getBytes());
 
 		return success;
@@ -124,7 +126,8 @@ public class Registry implements Node
 		//success = 0, failure != 0
 		byte success;
 		String info = new String();
-		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + " : " + socket.getLocalPort());
+		Connection connection = _connections.get(request.getIP() + ":" + request.getPort());
+		
 		if(request.getNodeIP().equals(socket.getInetAddress().toString())) //valid ip address in request
 		{
 			success = 0;
@@ -140,6 +143,7 @@ public class Registry implements Node
 		DeregisterResponse response = new DeregisterResponse();
 		response.setSuccess(success);
 		response.setAdditionalInfo(info);
+		
 		connection.sendData(response.getBytes());
 
 		return success;
