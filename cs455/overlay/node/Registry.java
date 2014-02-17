@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -152,6 +153,21 @@ public class Registry implements Node
 			System.out.println(_connections.get(key).getName());
 		}
 	}
+	
+	public void sendLinkWeights(LinkWeights linkWeights)
+	{
+		List<Connection> connList = new ArrayList<Connection>(_connections.values());
+		for(Connection connection : connList)
+		{
+			try
+			{
+				connection.sendData(linkWeights.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+		}
+	}
 
 	public static void main(String[] args)
 	{	
@@ -188,23 +204,27 @@ public class Registry implements Node
 			switch(command.toLowerCase())
 			{
 			case "list-messaging-nodes":
-				System.out.println("Sorry this isn't implemented yet...");
 				node.listMessagingNodes();
 				break;
+				
 			case "list-weights":
-				System.out.println("Sorry this isn't implemented yet...");
 				overlayCreator.printGraph();
 				break;
+				
 			case "setup-overlay":
-				System.out.println("Sorry this isn't implemented yet...");
 				overlayCreator.setupOverlay(node._connections);
 				break;
+				
 			case "send-overlay-link-weights":
 				System.out.println("Sorry this isn't implemented yet...");
+				LinkWeights linkWeights = overlayCreator.generateLinkWeightMessage();
+				node.sendLinkWeights(linkWeights);
 				break;
+				
 			case "start":
 				System.out.println("Sorry this isn't implemented yet...");
 				break;
+				
 			case "help":
 				System.out.println("Help Menu:\n"
 						+ "\tlist-messaging-nodes: prints information about connected messaging nodes\n"
@@ -215,9 +235,11 @@ public class Registry implements Node
 						+ "\thelp: prints help message\n"
 						+ "\tquit: ends the registry node");
 				break;
+				
 			case "quit":
 				quit = true;
 				break;
+				
 			default:
 				System.out.println("Invalid command: " + command);	
 			}

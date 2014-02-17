@@ -58,13 +58,13 @@ public class Graph {
 		}
 	}
 	
-	public void addVerticesWithStringList(List<String> names)
-	{
-		for(String name : names)
-		{
-			_vertices.add(new Vertex(name));
-		}
-	}
+//	public void addVerticesWithStringList(List<String> names)
+//	{
+//		for(String name : names)
+//		{
+//			_vertices.add(new Vertex(name));
+//		}
+//	}
 	
 	public void addEdges(List<Edge> edges)
 	{
@@ -87,12 +87,12 @@ public class Graph {
 		return found;
 	}
 	
-	public boolean hasVertex(String name)
+	public boolean hasVertex(String ip, int port)
 	{
 		boolean found = false;
 		for(Vertex v : _vertices)
 		{
-			if(v.getName().equals(name))
+			if(v.getIP().equals(ip) && v.getPort() == port)
 			{
 				found = true;
 			}
@@ -100,11 +100,11 @@ public class Graph {
 		return found;
 	}
 	
-	public Vertex getVertex(String name)
+	public Vertex getVertex(String ip, int port)
 	{
 		for(Vertex vertex : _vertices)
 		{
-			if(vertex.getName().equals(name))
+			if(vertex.getIP().equals(ip) && vertex.getPort() == port)
 			{
 				return vertex;
 			}

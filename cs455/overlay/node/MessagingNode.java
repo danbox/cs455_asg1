@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.Set;
 
+import cs455.overlay.dijkstra.RoutingCache;
 import cs455.overlay.transport.*;
 import cs455.overlay.wireformats.*;
 
@@ -20,11 +21,13 @@ public class MessagingNode implements Node
     private int								_registryPortNum;
     private int                             _portnum;
     private String							_localHostAddress;
+    private RoutingCache					_routingCache;
 	
 	public MessagingNode()
 	{
 		_server = new TCPServerThread(this);
 		_connections = new Hashtable<String, Connection>();
+		_routingCache = new RoutingCache();
 		try
 		{
 			_localHostAddress = InetAddress.getLocalHost().getHostAddress();
@@ -88,6 +91,7 @@ public class MessagingNode implements Node
 			}
 			System.out.println(registerResponse);
 			break;
+			
 		case Protocol.DEREGISTER_RESPONSE:
 			DeregisterResponse deregisterResponse = (DeregisterResponse)event;
 			if(deregisterResponse.getSuccess() == 0)
@@ -96,6 +100,7 @@ public class MessagingNode implements Node
 			}
 			System.out.println(deregisterResponse);
 			break;
+			
 		case Protocol.LINK_REQUEST:
 			LinkRequest linkRequest = (LinkRequest)event;
 			try
@@ -110,6 +115,7 @@ public class MessagingNode implements Node
 				ioe.printStackTrace();
 			}
 			break;
+			
 		case Protocol.REGISTER_REQUEST:
 			RegisterRequest registerRequest = (RegisterRequest)event;
 			try
@@ -121,6 +127,11 @@ public class MessagingNode implements Node
 			}
 			
 			break;
+			
+		case Protocol.LINK_WEIGHTS:
+			_routingCache.buildCache(event);
+			break;
+		
 		default:
 			System.out.println("Invalid event");	
 		}
@@ -257,10 +268,12 @@ public class MessagingNode implements Node
 			case "print-shortest-path":
 				System.out.println("Sorry this isn't implemented yet...");
 				break;
+				
 			case "exit-overlay":
 				System.out.println("Sorry this isn't implemented yet...");
 				node.sendDeregistrationRequest(connection, socket);
 				break;
+				
 			case "help":
 				System.out.println("Help Menu:\n"
 						+ "\tprint-shortest-path: prints shortest paths to all other messaging nodes within the system indicating the weights associated with the links\n"
@@ -268,12 +281,16 @@ public class MessagingNode implements Node
 						+ "\thelp: prints help message\n"
 						+ "\tquit: ends the messaging node");
 				break;
+				
 			case "list-connections":
 				node.listConnections();
 				break;
+			case "print-cache":
+				System.out.println(node._routingCache);
 			case "quit":
 				quit = true;
 				break;
+				
 			default:
 				System.out.println("Invalid command: " + command);	
 			}

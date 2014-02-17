@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import cs455.overlay.dijkstra.*;
 import cs455.overlay.transport.Connection;
+import cs455.overlay.wireformats.LinkInfo;
 import cs455.overlay.wireformats.LinkRequest;
+import cs455.overlay.wireformats.LinkWeights;
 
 public class OverlayCreator 
 {
@@ -46,8 +48,8 @@ public class OverlayCreator
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
 
 			//add edge to graph
-			Vertex source = _graph.getVertex(connList.get(i).getName());
-			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getName());
+			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
+			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
@@ -84,8 +86,8 @@ public class OverlayCreator
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), _NODE_PORT, linkWeight);
 
 			//add edge to graph
-			Vertex source = _graph.getVertex(connList.get(i).getName());
-			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getName());
+			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
+			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
@@ -102,12 +104,29 @@ public class OverlayCreator
 	
 	public void addNodesToGraph(Hashtable<String, Connection> connections)
 	{
-		List<String> connList = new ArrayList<String>(connections.keySet());
-		_graph.addVerticesWithStringList(connList);
+		List<Connection> connList = new ArrayList<Connection>(connections.values());
+		
+		for(Connection connection : connList)
+		{
+			_graph.addVertex(new Vertex(connection.getIP(), connection.getPort()));
+		}
 	}
 	
 	public void printGraph()
 	{
 		System.out.println(_graph);
+	}
+	
+	public LinkWeights generateLinkWeightMessage()
+	{
+		List<LinkInfo> infoList = new ArrayList<LinkInfo>();
+		for(Edge edge : _graph.getEdges())
+		{
+			Vertex source = edge.getSource();
+			Vertex destination = edge.getDestination();
+			infoList.add(new LinkInfo(source.getIP(), source.getPort(), destination.getIP(), destination.getPort(), edge.getWeight()));
+		}
+		
+		return new LinkWeights(infoList.size(), infoList);
 	}
 }

@@ -32,11 +32,10 @@ public class Edge {
 	public String toString()
 	{
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Source: ");
 		stringBuilder.append(_source);
-		stringBuilder.append(" Destination: ");
+		stringBuilder.append(" ");
 		stringBuilder.append(_destination);
-		stringBuilder.append(" Weight: ");
+		stringBuilder.append(" ");
 		stringBuilder.append(_weight);
 		return stringBuilder.toString();
 	}

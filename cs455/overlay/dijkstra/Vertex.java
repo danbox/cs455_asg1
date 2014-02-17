@@ -2,21 +2,28 @@ package cs455.overlay.dijkstra;
 
 public class Vertex {
 
-	private String	_name;
+	private String	_ip;
+	private int 	_port;
 	
-	public Vertex(String name)
+	public Vertex(String ip, int port)
 	{
-		_name = name;
+		_ip = ip;
+		_port = port;
 	}
 	
-	public String getName()
+	public String getIP()
 	{
-		return _name;
+		return _ip;
+	}
+	
+	public int getPort()
+	{
+		return _port;
 	}
 	
 	@Override
 	public String toString()
 	{
-		return _name;
+		return _ip + ":" + _port;
 	}
 }
