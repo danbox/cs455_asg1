@@ -25,12 +25,16 @@ public class RoutingCache
 			if(!_graph.hasVertex(source))
 			{
 				_graph.addVertex(source);
+				System.out.println(source + " added to cache");
 			}
 			if(!_graph.hasVertex(destination))
 			{
 				_graph.addVertex(destination);
+				System.out.println(destination + " added to cache");
 			}
-			_graph.addEdge(new Edge(source, destination, linkInfo.get_weight()));
+			Edge edge = new Edge(source, destination, linkInfo.get_weight());
+			_graph.addEdge(edge);
+			System.out.println(edge + " added to cache");
 		}
 	}
 	
