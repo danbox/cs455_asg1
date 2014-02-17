@@ -156,7 +156,7 @@ public class Registry implements Node
 		Set<String> keys = _connections.keySet();
 		for(String key : keys)
 		{
-			System.out.println(_connections.get(key).getName());
+			System.out.println(_connections.get(key));
 		}
 	}
 	
