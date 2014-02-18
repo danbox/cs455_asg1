@@ -109,7 +109,7 @@ public class Graph {
 	{
 		for(Vertex vertex : _vertices)
 		{
-			if(vertex.getIP().equals(ip) && vertex.getPort() == listeningPort)
+			if(vertex.getIP().equals(ip) && vertex.getListeningPort() == listeningPort)
 			{
 				return vertex;
 			}
