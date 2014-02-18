@@ -115,12 +115,16 @@ public class LinkWeights implements Event
 			
 			dout.writeInt(linkInfo.get_sourcePort());
 			
+			dout.writeInt(linkInfo.get_sourceListeningPort());
+			
 			byte[] destinationIPBytes = linkInfo.get_destinationIP().getBytes();
 			elementLength = destinationIPBytes.length;
 			dout.writeInt(elementLength);
 			dout.write(destinationIPBytes);
 			
 			dout.writeInt(linkInfo.get_destinationPort());
+			
+			dout.writeInt(linkInfo.get_destinationListeningPort());
 			
 			dout.writeInt(linkInfo.get_weight());
 		}
