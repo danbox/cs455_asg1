@@ -94,6 +94,7 @@ public class ShortestPath
 			for(Vertex vertex : getNeighbors(shortest))
 			{
 				System.out.println("NEIGHBOR: " + vertex);
+				System.out.println("SHORTEST: " + shortest);
 				alt = _distances.get(shortest) + getWeight(shortest, vertex);
 				
 				
