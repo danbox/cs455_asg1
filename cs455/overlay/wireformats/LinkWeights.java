@@ -50,6 +50,8 @@ public class LinkWeights implements Event
         	String sourceIP = new String(sourceIPBytes);
         	
         	int sourcePort = din.readInt();
+        	
+        	int sourceListeningPort = din.readInt();
 
         	int destinationIPLength = din.readInt();
         	byte[] destinationIPBytes = new byte[destinationIPLength];
@@ -58,9 +60,11 @@ public class LinkWeights implements Event
         	
         	int destinationPort = din.readInt();
         	
+        	int destinationListeningPort = din.readInt();
+        	
         	int linkWeight = din.readInt();
         	
-        	_links.add(new LinkInfo(sourceIP, sourcePort, destinationIP, destinationPort, linkWeight));
+        	_links.add(new LinkInfo(sourceIP, sourcePort, sourceListeningPort, destinationIP, destinationPort, destinationListeningPort, linkWeight));
         }
 		
 		baInputStream.close();

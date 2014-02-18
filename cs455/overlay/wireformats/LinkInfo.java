@@ -4,8 +4,10 @@ public class LinkInfo {
 
 	private String 		_sourceIP;
 	private int			_sourcePort;
+	private int			_sourceListeningPort;
 	private String		_destinationIP;
 	private int			_destinationPort;
+	private int			_destinationListeningPort;
 	private int			_weight;
 	
 	public LinkInfo()
@@ -14,12 +16,14 @@ public class LinkInfo {
 		_destinationIP = new String();
 	}
 	
-	public LinkInfo(String sourceIP, int sourcePort, String destinationIP, int destinationPort, int weight)
+	public LinkInfo(String sourceIP, int sourcePort, int sourceListeningPort, String destinationIP, int destinationPort, int destinationListeningPort, int weight)
 	{
 		_sourceIP = sourceIP;
 		_sourcePort = sourcePort;
+		_sourceListeningPort = sourceListeningPort;
 		_destinationIP = destinationIP;
 		_destinationPort = destinationPort;
+		_destinationListeningPort = destinationListeningPort;
 		_weight = weight;
 	}
 
@@ -41,6 +45,14 @@ public class LinkInfo {
 	public void set_sourcePort(int _sourcePort) 
 	{
 		this._sourcePort = _sourcePort;
+	}
+
+	public int get_sourceListeningPort() {
+		return _sourceListeningPort;
+	}
+
+	public int get_destinationListeningPort() {
+		return _destinationListeningPort;
 	}
 
 	public String get_destinationIP() 

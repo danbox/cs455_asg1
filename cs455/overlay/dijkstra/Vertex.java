@@ -22,19 +22,24 @@ public class Vertex {
 		return _port;
 	}
 	
+	public void setListeningPort(int port)
+	{
+		_listeningPort = port;
+	}
+	
 	public int getListeningPort()
 	{
 		return _listeningPort;
+	}
+	
+	public boolean equals(Vertex vertex)
+	{
+		return (_ip.equals(vertex.getIP()) && _port == vertex.getPort());
 	}
 	
 	@Override
 	public String toString()
 	{
 		return _ip + ":" + _listeningPort;
-	}
-	
-	public boolean equals(Vertex vertex)
-	{
-		return (_ip.equals(vertex.getIP()) && _port == vertex.getPort());
 	}
 }

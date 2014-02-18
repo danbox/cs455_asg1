@@ -16,7 +16,6 @@ public class OverlayCreator
 {
 
 	public Graph		_graph;
-	public final int	_NODE_PORT = 12322;
 
 	public OverlayCreator()
 	{
@@ -49,7 +48,9 @@ public class OverlayCreator
 
 			//add edge to graph
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
+			source.setListeningPort(connList.get(i).getListeningPort());
 			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
+			source.setListeningPort(connList.get(i).getListeningPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
@@ -87,7 +88,9 @@ public class OverlayCreator
 
 			//add edge to graph
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
+			source.setListeningPort(connList.get(i).getListeningPort());
 			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
+			source.setListeningPort(connList.get(i).getListeningPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
@@ -119,7 +122,7 @@ public class OverlayCreator
 		{
 			Vertex source = edge.getSource();
 			Vertex destination = edge.getDestination();
-			infoList.add(new LinkInfo(source.getIP(), source.getPort(), destination.getIP(), destination.getPort(), edge.getWeight()));
+			infoList.add(new LinkInfo(source.getIP(), source.getPort(), source.getListeningPort(), destination.getIP(), destination.getPort(), destination.getListeningPort(), edge.getWeight()));
 		}
 		LinkWeights linkWeights = new LinkWeights(infoList.size(), infoList);
 		System.out.println(linkWeights);
