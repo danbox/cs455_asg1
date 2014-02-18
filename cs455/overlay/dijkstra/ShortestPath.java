@@ -12,8 +12,10 @@ public class ShortestPath
 {
 	private List<Vertex> 		_nodes;
 	private List<Edge> 			_edges;
-	Hashtable<Vertex, Integer> 	_distances;
-	Hashtable<Vertex, Vertex> 	_predecessors;
+//	Hashtable<Vertex, Integer> 	_distances;
+//	Hashtable<Vertex, Vertex> 	_predecessors;
+	Hashtable<String, Integer> 	_distances;
+	Hashtable<String, Vertex> 	_predecessors;
 	List<Vertex> 				_unoptimizedNodes;
 	
 	public ShortestPath(Graph graph)
@@ -54,21 +56,72 @@ public class ShortestPath
 		return -1; //nodes are not neighbors
 	}
 	
-	public Hashtable<Vertex, Integer> getShortestPaths(Vertex node)
+//	public Hashtable<Vertex, Integer> getShortestPaths(Vertex node)
+//	{
+//		_distances = new Hashtable<Vertex, Integer>();
+//		_predecessors = new Hashtable<Vertex, Vertex>();
+//		_unoptimizedNodes = new ArrayList<Vertex>(_nodes);
+//		
+//		for(Vertex vertex : _nodes)
+//		{
+//			_distances.put(vertex, Integer.MAX_VALUE);		
+//		}
+//		
+//		//set distance to self to 0
+//		_distances.put(node, 0);
+//		
+//		while(!_unoptimizedNodes.isEmpty())
+//		{
+//			Vertex shortest = null;
+//			int shortestValue = Integer.MAX_VALUE;
+//			for(Vertex vertex : _unoptimizedNodes)
+//			{
+//				if(_distances.get(vertex) < shortestValue)
+//				{
+//					shortest = vertex;
+//					shortestValue = _distances.get(vertex);
+//				}
+//			}
+//			
+//			//remove shortest from unoptimized nodes list
+//			_unoptimizedNodes.remove(shortest);
+//			if(_distances.get(shortest) == Integer.MAX_VALUE)
+//			{
+//				break;
+//			}
+//			
+//			int alt = 0;
+//			for(Vertex vertex : getNeighbors(shortest))
+//			{
+//				System.out.println("NEIGHBOR: " + vertex);
+//				System.out.println("SHORTEST: " + shortest);
+//				alt = _distances.get(shortest) + getWeight(shortest, vertex);
+//				System.out.println(getWeight(shortest, vertex));
+//				System.out.println(_distances.get(vertex));
+//				if(alt < _distances.get(vertex))
+//				{
+//					_distances.put(vertex, alt);
+//					_predecessors.put(vertex, shortest);
+//					_unoptimizedNodes.add(vertex);
+//				}
+//			}
+//		}
+//		return _distances;		
+//	}
+	
+	public Hashtable<String, Integer> getShortestPaths(Vertex node)
 	{
-		_distances = new Hashtable<Vertex, Integer>();
-		_predecessors = new Hashtable<Vertex, Vertex>();
+		_distances = new Hashtable<String, Integer>();
+		_predecessors = new Hashtable<String, Vertex>();
 		_unoptimizedNodes = new ArrayList<Vertex>(_nodes);
 		
 		for(Vertex vertex : _nodes)
 		{
-			_distances.put(vertex, Integer.MAX_VALUE);
-			
-			
+			_distances.put(vertex.toString(), Integer.MAX_VALUE);		
 		}
 		
 		//set distance to self to 0
-		_distances.put(node, 0);
+		_distances.put(node.toString(), 0);
 		
 		while(!_unoptimizedNodes.isEmpty())
 		{
@@ -76,7 +129,7 @@ public class ShortestPath
 			int shortestValue = Integer.MAX_VALUE;
 			for(Vertex vertex : _unoptimizedNodes)
 			{
-				if(_distances.get(vertex) < shortestValue)
+				if(_distances.get(vertex.toString()) < shortestValue)
 				{
 					shortest = vertex;
 					shortestValue = _distances.get(vertex);
@@ -84,8 +137,8 @@ public class ShortestPath
 			}
 			
 			//remove shortest from unoptimized nodes list
-			_unoptimizedNodes.remove(shortest);
-			if(_distances.get(shortest) == Integer.MAX_VALUE)
+			_unoptimizedNodes.remove(shortest.toString());
+			if(_distances.get(shortest.toString()) == Integer.MAX_VALUE)
 			{
 				break;
 			}
@@ -97,19 +150,17 @@ public class ShortestPath
 				System.out.println("SHORTEST: " + shortest);
 				alt = _distances.get(shortest) + getWeight(shortest, vertex);
 				System.out.println(getWeight(shortest, vertex));
-				System.out.println(_distances.get(vertex));
-				if(alt < _distances.get(vertex))
+				System.out.println(_distances.get(vertex.toString()));
+				if(alt < _distances.get(vertex.toString()))
 				{
-					_distances.put(vertex, alt);
-					_predecessors.put(vertex, shortest);
+					_distances.put(vertex.toString(), alt);
+					_predecessors.put(vertex.toString(), shortest);
 					_unoptimizedNodes.add(vertex);
 				}
 			}
 		}
-		return _distances;
-		
+		return _distances;		
 	}
-	
 	public List<Vertex> getPath(Vertex destination)
 	{
 		List<Vertex> path = new ArrayList<Vertex>();
@@ -131,6 +182,7 @@ public class ShortestPath
 		Collections.reverse(path);
 		return path;
 	}
+	
 	
 //	public Stack<Vertex> getShortestPath(Vertex node, Vertex destination)
 //	{
