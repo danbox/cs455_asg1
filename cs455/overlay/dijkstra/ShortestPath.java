@@ -132,7 +132,7 @@ public class ShortestPath
 				if(_distances.get(vertex.toString()) < shortestValue)
 				{
 					shortest = vertex;
-					shortestValue = _distances.get(vertex);
+					shortestValue = _distances.get(vertex.toString());
 				}
 			}
 			
