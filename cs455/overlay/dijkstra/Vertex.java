@@ -35,7 +35,7 @@ public class Vertex {
 	@Override
 	public boolean equals(Object vertex)
 	{
-		System.out.println("THIS IS MY EQUALS");
+		System.out.println("EQUALS: " + _ip + ((Vertex) vertex).getIP() + _port + ((Vertex) vertex).getPort());
 		return (_ip.equals(((Vertex) vertex).getIP()) && _port == ((Vertex) vertex).getPort());
 	}
 	
