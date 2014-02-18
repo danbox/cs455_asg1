@@ -121,6 +121,13 @@ public class OverlayCreator
 		}
 	}
 	
+	public void printNodes()
+	{
+		for(Vertex v : _graph.getVertices())
+		{
+			System.out.println(v);
+		}
+	}
 	public LinkWeights generateLinkWeightMessage()
 	{
 		List<LinkInfo> infoList = new ArrayList<LinkInfo>();

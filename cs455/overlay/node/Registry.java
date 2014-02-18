@@ -227,6 +227,10 @@ public class Registry implements Node
 				node.sendLinkWeights(linkWeights);
 				break;
 				
+			case "print-nodes":
+				overlayCreator.printNodes();
+				break;
+				
 			case "start":
 				System.out.println("Sorry this isn't implemented yet...");
 				break;
