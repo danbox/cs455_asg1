@@ -96,7 +96,7 @@ public class Graph {
 	{
 		for(Vertex vertex : _vertices)
 		{
-			if(vertex.getIP().equals(ip) && (vertex.getPort() == port || vertex.getListeningPort() == port));
+			if(vertex.getIP().equals(ip) && vertex.getPort() == port);
 			{
 				return vertex;
 			}
