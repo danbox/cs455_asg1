@@ -29,11 +29,11 @@ public class Connection {
 			_name = _ip + ":" + _port;
 			_node = node;
 			_listeningPort = 0;
+			_node.registerConnection(this);
 			_receiver = new TCPReceiverThread(node, socket); 
 			_sender = new TCPSender(socket);
 			_receiver.start(); //not sure where to put this?
 			_linkWeight = -1; //-1 means that a weight has not been specified
-			_node.registerConnection(this);
 //			System.out.println(_port + " " + _localPort + " " + _listeningPort);
 		} catch(IOException ioe)
 		{
