@@ -47,9 +47,11 @@ public class OverlayCreator
 			LinkRequest linkRequest = new LinkRequest(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getListeningPort(), linkWeight);
 
 			//add edge to graph
+			System.out.println(connList.get(i).getIP() + connList.get(i).getPort());
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
 			System.out.println("Source: " + source);
 
+			System.out.println(connList.get(destinationIndex).getIP() + connList.get(destinationIndex).getPort());
 			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			System.out.println("Dest: " + destination);
 			
