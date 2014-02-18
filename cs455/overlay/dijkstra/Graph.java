@@ -98,6 +98,7 @@ public class Graph {
 		for(Vertex vertex : _vertices)
 		{
 			System.out.println(vertex);
+			System.out.println(vertex.getIP().equals(ip));
 			if(vertex.getIP().equals(ip) && vertex.getPort() == port);
 			{
 				return vertex;
