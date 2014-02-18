@@ -137,7 +137,7 @@ public class ShortestPath
 			}
 			
 			//remove shortest from unoptimized nodes list
-			_unoptimizedNodes.remove(shortest.toString());
+			_unoptimizedNodes.remove(shortest);
 			if(_distances.get(shortest.toString()) == Integer.MAX_VALUE)
 			{
 				break;
