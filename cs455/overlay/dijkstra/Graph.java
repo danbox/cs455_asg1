@@ -102,6 +102,7 @@ public class Graph {
 			System.out.println(vertex.getIP().equals(ip) && vertex.getPort() == port);
 			if(vertex.getIP().equals(ip) && vertex.getPort() == port);
 			{
+				System.out.println(vertex);
 				return vertex;
 			}
 		}
