@@ -148,7 +148,7 @@ public class ShortestPath
 			{
 				System.out.println("NEIGHBOR: " + vertex);
 				System.out.println("SHORTEST: " + shortest);
-				alt = _distances.get(shortest) + getWeight(shortest, vertex);
+				alt = _distances.get(shortest.toString()) + getWeight(shortest, vertex);
 				System.out.println(getWeight(shortest, vertex));
 				System.out.println(_distances.get(vertex.toString()));
 				if(alt < _distances.get(vertex.toString()))
