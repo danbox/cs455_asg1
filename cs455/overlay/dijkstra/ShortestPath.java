@@ -167,15 +167,15 @@ public class ShortestPath
 		
 		Vertex curr = destination;
 		
-		if(_predecessors.get(curr) == null)
+		if(_predecessors.get(curr.toString()) == null)
 		{
 			return null;
 		}
 		
 		path.add(curr);
-		while(_predecessors.get(curr) != null)
+		while(_predecessors.get(curr.toString()) != null)
 		{
-			curr = _predecessors.get(curr);
+			curr = _predecessors.get(curr.toString());
 			path.add(curr);
 		}
 		
