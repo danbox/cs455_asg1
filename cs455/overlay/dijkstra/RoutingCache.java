@@ -26,7 +26,9 @@ public class RoutingCache
 		for(LinkInfo linkInfo : linkWeights.getLinks())
 		{
 			Vertex source = new Vertex(linkInfo.get_sourceIP(), linkInfo.get_sourcePort());
+			source.setListeningPort(linkInfo.get_sourceListeningPort());
 			Vertex destination = new Vertex(linkInfo.get_destinationIP(), linkInfo.get_destinationPort());
+			destination.setListeningPort(linkInfo.get_destinationListeningPort());
 			
 			if(!_graph.hasVertex(source))
 			{
