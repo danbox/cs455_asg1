@@ -90,13 +90,13 @@ public class ShortestPath
 				break;
 			}
 			
-			int alt;
+			int alt = 0;
 			for(Vertex vertex : getNeighbors(shortest))
 			{
 				System.out.println("NEIGHBOR: " + vertex);
 				System.out.println("SHORTEST: " + shortest);
 				alt = _distances.get(shortest) + getWeight(shortest, vertex);
-				
+				System.out.println(getWeight(shortest, vertex));
 				
 				if(alt < _distances.get(vertex))
 				{
