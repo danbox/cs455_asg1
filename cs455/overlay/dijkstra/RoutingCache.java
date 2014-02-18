@@ -13,12 +13,12 @@ public class RoutingCache
 {
 
 	private Graph 					_graph;
-	Hashtable<Vertex, List<Vertex>> _shortestPaths;
+	Hashtable<String, List<Vertex>> _shortestPaths;
 	
 	public RoutingCache()
 	{
 		_graph = new Graph();
-		_shortestPaths = new Hashtable<Vertex, List<Vertex>>();
+		_shortestPaths = new Hashtable<String, List<Vertex>>();
 	}
 	
 	public void buildGraph(LinkWeights linkWeights)
@@ -49,7 +49,7 @@ public class RoutingCache
 		shortestPath.getShortestPaths(_graph.getSelf(node.getLocalHostAddress(), node.getPortNum())); //this is where null value is
 		for(Vertex destination : _graph.getVertices())
 		{
-			_shortestPaths.put(destination, shortestPath.getPath(destination));
+			_shortestPaths.put(destination.toString(), shortestPath.getPath(destination));
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class RoutingCache
 		stringBuilder.append("Edges: \n");
 		stringBuilder.append(_graph);
 		stringBuilder.append("Shortest Paths: \n");
-		for(Vertex destination : _shortestPaths.keySet())
+		for(String destination : _shortestPaths.keySet())
 		{
 			stringBuilder.append("To: " + destination + "\n");
 			for(Vertex curr : _shortestPaths.get(destination))
