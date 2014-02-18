@@ -189,47 +189,47 @@ public class ShortestPath
 //			return vertices;
 	
 	
-	public static void main(String[] args)
-	{
-		List<Vertex> vertices = new ArrayList<Vertex>();
-		List<Edge> edges = new ArrayList<Edge>();
-		
-		Vertex vertex1 = new Vertex("1", 1);
-		Vertex vertex2 = new Vertex("2", 2);
-		Vertex vertex3 = new Vertex("3", 3);
-		Vertex vertex4 = new Vertex("4", 4);
-		vertices.add(vertex1);
-		vertices.add(vertex2);
-		vertices.add(vertex3);
-		vertices.add(vertex4);
-		
-		Edge edge1 = new Edge(vertex1, vertex2, 1);
-		Edge edge2 = new Edge(vertex1, vertex3, 2);
-		Edge edge3 = new Edge(vertex2, vertex4, 5);
-		Edge edge4 = new Edge(vertex3, vertex4, 3);
-		edges.add(edge1);
-		edges.add(edge2);
-		edges.add(edge3);
-		edges.add(edge4);
-		
-		Graph graph = new Graph(vertices, edges);
-		System.out.println(graph.hasVertex(new Vertex("1", 2)));
-		ShortestPath shortestPath = new ShortestPath(graph);
-		Hashtable<Vertex, Integer> paths = shortestPath.getShortestPaths(vertex4);
-		
-		List<Vertex> temp = new ArrayList<Vertex>(paths.keySet());
-		for(Vertex vertex : temp)
-		{
-			System.out.println(vertex + " " + paths.get(vertex));
-		}
-		
-		System.out.println();
-		
-		List<Vertex> path = shortestPath.getPath(vertex2);
-		for(Vertex vertex : path)
-		{
-			System.out.println(vertex);
-		}
-		
-	}
+//	public static void main(String[] args)
+//	{
+//		List<Vertex> vertices = new ArrayList<Vertex>();
+//		List<Edge> edges = new ArrayList<Edge>();
+//		
+//		Vertex vertex1 = new Vertex("1", 1);
+//		Vertex vertex2 = new Vertex("2", 2);
+//		Vertex vertex3 = new Vertex("3", 3);
+//		Vertex vertex4 = new Vertex("4", 4);
+//		vertices.add(vertex1);
+//		vertices.add(vertex2);
+//		vertices.add(vertex3);
+//		vertices.add(vertex4);
+//		
+//		Edge edge1 = new Edge(vertex1, vertex2, 1);
+//		Edge edge2 = new Edge(vertex1, vertex3, 2);
+//		Edge edge3 = new Edge(vertex2, vertex4, 5);
+//		Edge edge4 = new Edge(vertex3, vertex4, 3);
+//		edges.add(edge1);
+//		edges.add(edge2);
+//		edges.add(edge3);
+//		edges.add(edge4);
+//		
+//		Graph graph = new Graph(vertices, edges);
+//		System.out.println(graph.hasVertex(new Vertex("1", 2)));
+//		ShortestPath shortestPath = new ShortestPath(graph);
+//		Hashtable<Vertex, Integer> paths = shortestPath.getShortestPaths(vertex4);
+//		
+//		List<Vertex> temp = new ArrayList<Vertex>(paths.keySet());
+//		for(Vertex vertex : temp)
+//		{
+//			System.out.println(vertex + " " + paths.get(vertex));
+//		}
+//		
+//		System.out.println();
+//		
+//		List<Vertex> path = shortestPath.getPath(vertex2);
+//		for(Vertex vertex : path)
+//		{
+//			System.out.println(vertex);
+//		}
+//		
+//	}
 }

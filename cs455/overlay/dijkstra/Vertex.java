@@ -4,6 +4,7 @@ public class Vertex {
 
 	private String	_ip;
 	private int 	_port;
+	private int		_listeningPort;
 	
 	public Vertex(String ip, int port)
 	{
@@ -21,10 +22,15 @@ public class Vertex {
 		return _port;
 	}
 	
+	public int getListeningPort()
+	{
+		return _listeningPort;
+	}
+	
 	@Override
 	public String toString()
 	{
-		return _ip + ":" + _port;
+		return _ip + ":" + _listeningPort;
 	}
 	
 	public boolean equals(Vertex vertex)

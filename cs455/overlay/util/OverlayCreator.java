@@ -49,7 +49,7 @@ public class OverlayCreator
 
 			//add edge to graph
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
-			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getListeningPort());
+			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
@@ -87,7 +87,7 @@ public class OverlayCreator
 
 			//add edge to graph
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
-			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getListeningPort());
+			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
