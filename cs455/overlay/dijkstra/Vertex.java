@@ -32,9 +32,10 @@ public class Vertex {
 		return _listeningPort;
 	}
 	
-	public boolean equals(Vertex vertex)
+	@Override
+	public boolean equals(Object vertex)
 	{
-		return (_ip.equals(vertex.getIP()) && _port == vertex.getPort());
+		return (_ip.equals(((Vertex) vertex).getIP()) && _port == ((Vertex) vertex).getPort());
 	}
 	
 	@Override

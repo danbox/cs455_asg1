@@ -39,23 +39,6 @@ public class ShortestPath
 		return neighbors;
 	}
 	
-//	private List<Edge> getVertexEdges(Vertex node)
-//	{
-//		List<Edge> edges = new ArrayList<Edge>();
-//		
-//		for(Edge edge : _edges)
-//		{
-//			if(edge.getSource().equals(node))
-//			{
-//				edges.add(edge);
-//			}else if(edge.getDestination().equals(node))
-//			{
-//				edges.add(edge);
-//			}
-//		}
-//		return edges;
-//	}
-	
 	private int getWeight(Vertex node, Vertex destination)
 	{
 		for(Edge edge : _edges)
