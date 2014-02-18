@@ -104,6 +104,18 @@ public class Graph {
 		return null;
 	}
 	
+	public Vertex getSelf(String ip, int listeningPort)
+	{
+		for(Vertex vertex : _vertices)
+		{
+			if(vertex.getIP().equals(ip) && vertex.getPort() == listeningPort);
+			{
+				return vertex;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public String toString()
 	{
