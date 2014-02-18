@@ -89,8 +89,10 @@ public class OverlayCreator
 			//add edge to graph
 			Vertex source = _graph.getVertex(connList.get(i).getIP(), connList.get(i).getPort());
 			source.setListeningPort(connList.get(i).getListeningPort());
+			
 			Vertex destination = _graph.getVertex(connList.get(destinationIndex).getIP(), connList.get(destinationIndex).getPort());
 			destination.setListeningPort(connList.get(destinationIndex).getListeningPort());
+			
 			_graph.addEdge(new Edge(source, destination, linkWeight));
 			
 			//send data
