@@ -197,7 +197,6 @@ public class MessagingNode implements Node
 			thread.start();
 			
 			//create task complete
-			sendTaskComplete();
 			break;
 			
 		case Protocol.TASK_SUMMARY_REQUEST:
