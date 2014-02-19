@@ -141,6 +141,10 @@ public class MessagingNode implements Node
 			_routingCache.buildShortestPaths(this);
 			break;
 		
+		case Protocol.MESSAGE:
+			Message message = (Message)event;
+			System.out.println("Message received");
+			break;
 		default:
 			System.out.println("Invalid event");	
 		}
@@ -232,16 +236,35 @@ public class MessagingNode implements Node
 		//set path
 		LinkedList<Vertex> path = _routingCache.getPath(target);
 		
+		while(path.size() == 1) //chose self
+		{
+			targetIndex = (int)(1 + Math.random() * (nodes.size() - 1));
+			target = nodes.get(targetIndex);
+			path = _routingCache.getPath(target);
+		}
+		
 		//remove self from path
 		path.poll();
 		
 		//get next node in path
 		Vertex next = path.element();
 		
+		//create message
+		int payload = (int)Math.random();
+		Message message = new Message(payload, path);
 		//get connection
 //		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 		System.out.println(conn);
+		
+		//send message
+		try
+		{
+			conn.sendData(message.getBytes());
+		}catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args)

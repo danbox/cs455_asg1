@@ -12,20 +12,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+import cs455.overlay.dijkstra.Vertex;
 import cs455.overlay.node.MessagingNode;
 
 public class Message implements Event
 {
 	private final int			_TYPE = Protocol.MESSAGE;
 	private int 				_payload;
-	private List<String> 		_path;
+	private List<Vertex> 		_path;
 	
 	public Message()
 	{
-		_path = new LinkedList<String>();
+		_path = new LinkedList<Vertex>();
 	}
 
-	public Message(int payload, List<String> path)
+	public Message(int payload, LinkedList<Vertex> path)
 	{
 		_payload = payload;
 		_path = path;
@@ -52,7 +53,7 @@ public class Message implements Event
 			byte[] nodeBytes = new byte[nodeLength];
 			din.readFully(nodeBytes);
 			
-			_path.add(new String(nodeBytes));
+			_path.add(new Vertex(nodeBytes));
 		}
 
 		baInputStream.close();
@@ -69,12 +70,12 @@ public class Message implements Event
 		return _payload;
 	}
 
-	public void setPath(List<String> path)
+	public void setPath(List<Vertex> path)
 	{
 		_path = path;
 	}
 
-	public List<String> getPath()
+	public List<Vertex> getPath()
 	{
 		return _path;
 	}
@@ -98,7 +99,7 @@ public class Message implements Event
 		
 		dout.writeInt(_path.size());
 		
-		for(String node : _path)
+		for(Vertex node : _path)
 		{
 			byte[] nodeBytes = node.getBytes();
 			int elementLength = nodeBytes.length;
