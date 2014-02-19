@@ -153,19 +153,14 @@ public class MessagingNode implements Node
 
 		case Protocol.MESSAGE:
 			Message message = (Message)event;
-			System.out.println("Message received");
 
 			LinkedList<Vertex> path = message.getPath();
 
-			System.out.println(path);
 			path.poll();
 
-			System.out.println(path);
 
 			if(path.isEmpty()) //reached destination
 			{
-				System.out.println("Reached desination!");
-				System.out.println(message.getPayload());
 				_receiveTracker++;
 				_receiveSummation += message.getPayload();
 				
@@ -183,8 +178,6 @@ public class MessagingNode implements Node
 
 				//create message
 				Message nextMessage = new Message(message.getPayload(), path);
-				//				System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
-				System.out.println(conn);
 
 				//send message
 				try
@@ -338,20 +331,14 @@ public class MessagingNode implements Node
 
 		//remove self from path
 		path.poll();
-		System.out.println("Target: " + target);
-		System.out.println("Destination: " + path.getLast());
 		//get next node in path
 		Vertex next = path.element();
-		System.out.println("Next: " + next);
 
-		System.out.println(path);
 
 		//get connection
-		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 		if(conn == null)
 		{
-			System.out.println("it was null.........");
 			conn = _connections.get(next.getIP() + ":" + next.getPort());
 		}
 		System.out.println(conn);
