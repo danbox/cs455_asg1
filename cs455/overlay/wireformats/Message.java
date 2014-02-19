@@ -54,6 +54,8 @@ public class Message implements Event
 			byte[] nodeBytes = new byte[nodeLength];
 			din.readFully(nodeBytes);
 			
+			Vertex v = new Vertex(nodeBytes);
+			System.out.println("IN MESSAGE " + v);
 			_path.add(new Vertex(nodeBytes));
 		}
 
