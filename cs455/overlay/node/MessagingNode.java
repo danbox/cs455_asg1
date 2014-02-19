@@ -290,6 +290,15 @@ public class MessagingNode implements Node
 		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
 		System.out.println(connection);
+		
+		TaskComplete request = new TaskComplete(_localHostAddress, _portnum);
+		try
+		{
+			connection.sendData(request.getBytes());
+		}catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
 	}
 
 	public void listConnections()

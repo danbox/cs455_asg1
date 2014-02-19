@@ -50,6 +50,7 @@ public class Registry implements Node
 
 
 			break;
+			
 		case Protocol.DEREGISTER_REQUEST:
 			DeregisterRequest deregisterRequest = (DeregisterRequest)event;
 			try
@@ -64,6 +65,12 @@ public class Registry implements Node
 			{
 				ioe.printStackTrace();
 			}
+			break;
+			
+		case Protocol.TASK_COMPLETE:
+			System.out.println("TASK COMPLETE");
+			break;
+			
 		default:
 			//invalid event?
 			break;
