@@ -28,10 +28,7 @@ public class EventFactory
 
 		try
 		{
-			for(byte b : data)
-			{
-				System.out.print(Integer.toHexString(b));
-			}
+
 			int eventType = din.readInt();
 	        baInputStream.close();
 	        din.close();
@@ -75,7 +72,10 @@ public class EventFactory
 			}
 		}catch(IOException ioe)
 		{
-//			System.out.println(data);
+			for(byte b : data)
+			{
+				System.out.print(Integer.toHexString(b));
+			}
 			ioe.printStackTrace();
 		}
 		return null;
