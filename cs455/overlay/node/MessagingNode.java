@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -166,8 +167,7 @@ public class MessagingNode implements Node
 
 
 				//create message
-				int payload = (int)Math.random();
-				Message nextMessage = new Message(payload, path);
+				Message nextMessage = new Message(message.getPayload(), path);
 				//				System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 				System.out.println(conn);
 
@@ -312,9 +312,10 @@ public class MessagingNode implements Node
 		System.out.println(conn);
 
 		//send 5 messages per rounds
+		Random random = new Random();
 		for(int i = 0; i < 5; ++i)
 		{
-			int payload = (int)Math.random();
+			int payload = random.nextInt();
 			Message message = new Message(payload, path);
 			try
 			{
