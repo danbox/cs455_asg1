@@ -61,7 +61,7 @@ public class EventFactory
 			case Protocol.TASK_COMPLETE:
 				return new TaskComplete();
 			case Protocol.TASK_INITIATE:
-				return new TaskInitiate();
+				return new TaskInitiate(data);
 			case Protocol.TASK_SUMMARY_REQUEST:
 				return new TaskSummaryRequest();
 			case Protocol.TASK_SUMMARY_RESPONSE:

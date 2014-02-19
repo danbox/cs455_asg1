@@ -55,7 +55,6 @@ public class Message implements Event
 			din.readFully(nodeBytes);
 			
 			Vertex v = new Vertex(nodeBytes);
-			System.out.println("IN MESSAGE " + v);
 			_path.add(new Vertex(nodeBytes));
 		}
 

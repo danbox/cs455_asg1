@@ -174,6 +174,22 @@ public class Registry implements Node
 			}
 		}
 	}
+	
+	private void sendTaskInitiate()
+	{
+		List<Connection> connList = new ArrayList<Connection>(_connections.values());
+		TaskInitiate init = new TaskInitiate();
+		for(Connection connection : connList)
+		{
+			try
+			{
+				connection.sendData(init.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+		}
+	}
 
 	public static void main(String[] args)
 	{	
@@ -233,6 +249,7 @@ public class Registry implements Node
 				
 			case "start":
 				System.out.println("Sorry this isn't implemented yet...");
+				node.sendTaskInitiate();
 				break;
 				
 			case "help":
