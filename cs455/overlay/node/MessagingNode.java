@@ -200,10 +200,10 @@ public class MessagingNode implements Node
 
 		case Protocol.TASK_INITIATE:
 			//send 5000 rounds
-			for(int i = 0; i < 5000; ++ i)
-			{
-				sendMessageRound();
-			}
+//			for(int i = 0; i < 5000; ++ i)
+//			{
+//				sendMessageRound();
+//			}
 			
 			//create task complete
 			sendTaskComplete();
