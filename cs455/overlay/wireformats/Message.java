@@ -19,7 +19,7 @@ public class Message implements Event
 {
 	private final int			_TYPE = Protocol.MESSAGE;
 	private int 				_payload;
-	private List<Vertex> 		_path;
+	private LinkedList<Vertex> 		_path;
 	
 	public Message()
 	{
@@ -70,12 +70,12 @@ public class Message implements Event
 		return _payload;
 	}
 
-	public void setPath(List<Vertex> path)
+	public void setPath(LinkedList<Vertex> path)
 	{
 		_path = path;
 	}
 
-	public List<Vertex> getPath()
+	public LinkedList<Vertex> getPath()
 	{
 		return _path;
 	}

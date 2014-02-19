@@ -144,6 +144,36 @@ public class MessagingNode implements Node
 		case Protocol.MESSAGE:
 			Message message = (Message)event;
 			System.out.println("Message received");
+			
+			LinkedList<Vertex> path = message.getPath();
+			
+			path.poll();
+			
+			if(path.size() == 0) //reached destination
+			{
+				System.out.println("Reached desination!");
+			}else
+			{
+				//get next node in path
+				Vertex next = path.element();
+				
+				//create message
+				int payload = (int)Math.random();
+				Message nextMessage = new Message(payload, path);
+				//get connection
+//				System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
+				Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
+				System.out.println(conn);
+				
+				//send message
+				try
+				{
+					conn.sendData(nextMessage.getBytes());
+				}catch(IOException ioe)
+				{
+					ioe.printStackTrace();
+				}
+			}
 			break;
 		default:
 			System.out.println("Invalid event");	
