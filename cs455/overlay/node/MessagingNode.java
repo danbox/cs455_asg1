@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import cs455.overlay.dijkstra.RoutingCache;
 import cs455.overlay.dijkstra.Vertex;
@@ -198,7 +199,7 @@ public class MessagingNode implements Node
 				sendMessageRound();
 				try 
 				{
-					Thread.sleep(10);
+					TimeUnit.MILLISECONDS.sleep(100);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
