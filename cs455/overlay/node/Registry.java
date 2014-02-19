@@ -77,6 +77,16 @@ public class Registry implements Node
 			}
 			break;
 			
+		case Protocol.TASK_SUMMARY_RESPONSE:
+			TaskSummaryResponse response = (TaskSummaryResponse)event;
+			System.out.println(response.getIP());
+			System.out.println(response.getPort());
+			System.out.println(response.getSendTracker());
+			System.out.println(response.getSendSummation());
+			System.out.println(response.getReceiveTracker());
+			System.out.println(response.getReceiveSummation());
+			System.out.println(response.getRelayTracker());
+			
 		default:
 			//invalid event?
 			break;
