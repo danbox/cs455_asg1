@@ -395,6 +395,7 @@ public class MessagingNode implements Node
 			//send registration request to registry
 			System.out.println(node.getRegistryHostName() + node.getRegistryPortNum());
 			socket = new Socket(node.getRegistryHostName(), node.getRegistryPortNum());
+			System.out.println(socket.getPort());
 			connection = new Connection(node, socket);
 			node.sendRegistrationRequest(connection, -1); //-1 defines no link weight
 
