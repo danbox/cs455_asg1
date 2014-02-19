@@ -96,7 +96,7 @@ public class MessagingNode implements Node
 	public synchronized void onEvent(Event event, Socket socket)
 	{
 		//TODO: registration, response, etc...
-		System.out.println("In Messaging Node onEvent(), event type: " + event.getType());
+//		System.out.println("In Messaging Node onEvent(), event type: " + event.getType());
 		switch(event.getType())
 		{
 		case Protocol.REGISTER_RESPONSE:
