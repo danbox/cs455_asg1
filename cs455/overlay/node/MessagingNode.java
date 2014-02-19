@@ -226,7 +226,7 @@ public class MessagingNode implements Node
 	{
 		//get random target
 		List<Vertex> nodes = _routingCache.getNodes();
-		int targetIndex = (int)(1 + Math.random() * (nodes.size()));
+		int targetIndex = (int)(1 + Math.random() * (nodes.size() - 1));
 		Vertex target = nodes.get(targetIndex);
 		
 		//set path
