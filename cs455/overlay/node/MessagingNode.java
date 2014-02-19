@@ -385,12 +385,12 @@ public class MessagingNode implements Node
 			{
 				InetAddress regAddr = InetAddress.getByName(args[0]);
 				String reg = regAddr.getCanonicalHostName();
-				System.out.println(reg);
+				node.setRegistryHostName(reg);
+				
 			}catch(UnknownHostException uhe)
 			{
 				uhe.printStackTrace();
 			}
-			node.setRegistryHostName(args[0]);
 			try
 			{
 				node.setRegistryPortNum(Integer.parseInt(args[1]));
