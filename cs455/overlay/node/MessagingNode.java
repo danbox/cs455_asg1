@@ -155,6 +155,7 @@ public class MessagingNode implements Node
 			if(path.isEmpty()) //reached destination
 			{
 				System.out.println("Reached desination!");
+				System.out.println(message.getPayload());
 			}else
 			{
 				//get next node in path
