@@ -230,13 +230,13 @@ public class MessagingNode implements Node
 		Vertex target = nodes.get(targetIndex);
 		
 		//set path
-		LinkedList<Vertex> path = _routingCache.getPath(target);
+		List<Vertex> path = _routingCache.getPath(target);
 		
 		//remove self from path
-		path.poll();
+		path.remove(0);
 		
 		//get next node in path
-		Vertex next = path.element();
+		Vertex next = path.get(0);
 		
 		//get connection
 		Connection conn = _connections.get(next.getIP() + ":" + next.getPort());
@@ -324,7 +324,8 @@ public class MessagingNode implements Node
 				System.out.println(node._routingCache);
 				break;
 			case "send-message":
-				
+				node.sendMessage();
+				break;
 			case "quit":
 				quit = true;
 				break;

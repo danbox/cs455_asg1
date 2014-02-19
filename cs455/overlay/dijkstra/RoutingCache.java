@@ -60,7 +60,7 @@ public class RoutingCache
 		}
 	}
 	
-	public LinkedList<Vertex> getPath(Vertex destination)
+	public List<Vertex> getPath(Vertex destination)
 	{
 		return _shortestPath.getPath(destination);
 	}

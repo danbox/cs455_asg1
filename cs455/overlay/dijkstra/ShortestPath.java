@@ -161,9 +161,9 @@ public class ShortestPath
 		}
 		return _distances;		
 	}
-	public LinkedList<Vertex> getPath(Vertex destination)
+	public List<Vertex> getPath(Vertex destination)
 	{
-		LinkedList<Vertex> path = new LinkedList<Vertex>();
+		List<Vertex> path = new ArrayList<Vertex>();
 		
 		Vertex curr = destination;
 		
@@ -262,7 +262,7 @@ public class ShortestPath
 		
 		System.out.println();
 		
-		List<Vertex> path = shortestPath.getPath(vertex2);
+		List<Vertex> path = shortestPath.getPath(vertex1);
 		for(Vertex vertex : path)
 		{
 			System.out.println(vertex);
