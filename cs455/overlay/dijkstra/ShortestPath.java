@@ -161,9 +161,9 @@ public class ShortestPath
 		}
 		return _distances;		
 	}
-	public List<Vertex> getPath(Vertex destination)
+	public LinkedList<Vertex> getPath(Vertex destination)
 	{
-		List<Vertex> path = new ArrayList<Vertex>();
+		LinkedList<Vertex> path = new LinkedList<Vertex>();
 		
 		Vertex curr = destination;
 		

@@ -21,7 +21,7 @@ public class RoutingCache
 	{
 		_graph = new Graph();
 		_shortestPaths = new Hashtable<Vertex, List<Vertex>>();
-		_shortestPath = new ShortestPath(_graph);
+//		_shortestPath = new ShortestPath(_graph);
 	}
 	
 	public void buildGraph(LinkWeights linkWeights)
@@ -50,6 +50,7 @@ public class RoutingCache
 	
 	public void buildShortestPaths(MessagingNode node)
 	{
+		_shortestPath = new ShortestPath(_graph);
 		System.out.println("Listening port: " + node.getPortNum());
 		System.out.println(_graph.getSelf(node.getLocalHostAddress(), node.getPortNum()));
 		System.out.println(node.getLocalHostAddress() + " " + node.getPortNum());
@@ -60,7 +61,7 @@ public class RoutingCache
 		}
 	}
 	
-	public List<Vertex> getPath(Vertex destination)
+	public LinkedList<Vertex> getPath(Vertex destination)
 	{
 		return _shortestPath.getPath(destination);
 	}

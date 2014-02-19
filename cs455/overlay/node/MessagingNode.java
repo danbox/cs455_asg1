@@ -230,7 +230,7 @@ public class MessagingNode implements Node
 		Vertex target = nodes.get(targetIndex);
 		
 		//set path
-		List<Vertex> path = _routingCache.getPath(target);
+		LinkedList<Vertex> path = _routingCache.getPath(target);
 		
 		//remove self from path
 		path.remove(0);
