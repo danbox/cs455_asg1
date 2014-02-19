@@ -200,7 +200,8 @@ public class MessagingNode implements Node
 			break;
 			
 		case Protocol.TASK_SUMMARY_REQUEST:
-			sendTaskSummary();
+			RoundThread thread = new RoundThread(this);
+			thread.start();
 			break;
 			
 		default:
