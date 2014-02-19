@@ -193,20 +193,7 @@ public class MessagingNode implements Node
 			break;
 
 		case Protocol.TASK_INITIATE:
-			//send 5000 rounds
-				int j = 0;
-			for(int i = 0; i < 5000; ++ i)
-			{
-				sendMessageRound();
-				System.out.println(++j);
-				try 
-				{
-					TimeUnit.MILLISECONDS.sleep(20);
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-			}
+			
 			
 			//create task complete
 			sendTaskComplete();
@@ -309,7 +296,7 @@ public class MessagingNode implements Node
 		}
 	}
 	
-	private void sendTaskSummary()
+	protected void sendTaskSummary()
 	{
 //		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
@@ -383,6 +370,30 @@ public class MessagingNode implements Node
 				ioe.printStackTrace();
 			}
 //		}
+	}
+
+	public void set_sendTracker(int _sendTracker) {
+		this._sendTracker = _sendTracker;
+	}
+
+	public void set_sendSummation(long _sendSummation) {
+		this._sendSummation = _sendSummation;
+	}
+
+	public Hashtable<String, Connection> get_connections() {
+		return _connections;
+	}
+
+	public RoutingCache get_routingCache() {
+		return _routingCache;
+	}
+
+	public int get_sendTracker() {
+		return _sendTracker;
+	}
+
+	public long get_sendSummation() {
+		return _sendSummation;
 	}
 
 	public static void main(String[] args)
