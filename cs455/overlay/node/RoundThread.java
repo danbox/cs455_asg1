@@ -72,7 +72,7 @@ public class RoundThread extends Thread
 			}
 			try
 			{
-				Thread.sleep(10);
+				Thread.sleep(50);
 			}catch(InterruptedException uhe)
 			{
 				uhe.printStackTrace();
