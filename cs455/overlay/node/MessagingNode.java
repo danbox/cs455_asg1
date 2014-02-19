@@ -253,6 +253,7 @@ public class MessagingNode implements Node
 		for(String key : keys)
 		{
 			System.out.println(_connections.get(key));
+			System.out.println(_connections.get(key).getPort());
 		}
 	}
 	
