@@ -51,7 +51,7 @@ public class EventFactory
 			case Protocol.LINK_WEIGHTS:
 				return new LinkWeights(data);
 			case Protocol.MESSAGE:
-				return new Message();
+				return new Message(data);
 			case Protocol.REGISTER_RESPONSE:
 				System.out.println("Creating register response");
 				return new RegisterResponse(data);
