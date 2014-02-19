@@ -121,7 +121,7 @@ public class MessagingNode implements Node
 			LinkRequest linkRequest = (LinkRequest)event;
 			try
 			{
-				System.out.println(linkRequest.getIP() + linkRequest.getPort());
+//				System.out.println(linkRequest.getIP() + linkRequest.getPort());
 				Socket linkSocket = new Socket(linkRequest.getIP(), linkRequest.getPort());
 				Connection linkConnection = new Connection(this, linkSocket);
 				linkConnection.setLinkWeight(linkRequest.getLinkWeight());
@@ -146,7 +146,7 @@ public class MessagingNode implements Node
 			break;
 
 		case Protocol.LINK_WEIGHTS:
-			System.out.println("Link Weights received");
+//			System.out.println("Link Weights received");
 			LinkWeights linkWeights = (LinkWeights)event;
 			_routingCache.buildGraph(linkWeights);
 			_routingCache.buildShortestPaths(this);

@@ -28,7 +28,7 @@ public class TCPServerThread extends Thread
 			_node.setPortNum(ss.getLocalPort());
 			while(true)
 			{
-				System.out.println("Inside Server Thread loop");
+//				System.out.println("Inside Server Thread loop");
 				Socket socket = ss.accept();
 				new Connection(_node, socket);
 				

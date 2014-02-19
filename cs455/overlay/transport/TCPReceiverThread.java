@@ -32,13 +32,13 @@ public class TCPReceiverThread extends Thread
 			try
 			{
 				dataLength = _din.readInt();
-				System.out.println("I am receiver thread: " + Thread.currentThread().getId());
+//				System.out.println("I am receiver thread: " + Thread.currentThread().getId());
 				byte[] data = new byte[dataLength];
-				System.out.println("inside receiver thread Data length: " + dataLength);
+//				System.out.println("inside receiver thread Data length: " + dataLength);
 				
 				_din.readFully(data, 0, dataLength);
 //						System.out.println(new String(_data));
-				System.out.println("after readFully in receiver thread");
+//				System.out.println("after readFully in receiver thread");
 				Event event = EventFactory.createEvent(data);
 				_node.onEvent(event, _socket);
 				
