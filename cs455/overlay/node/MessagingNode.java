@@ -195,7 +195,7 @@ public class MessagingNode implements Node
 		case Protocol.TASK_INITIATE:
 			//send 5000 rounds
 				int j = 0;
-			for(int i = 0; i < 5000; ++ i)
+			for(int i = 0; i < 5; ++ i)
 			{
 				sendMessageRound();
 				System.out.println(++j);
@@ -211,6 +211,11 @@ public class MessagingNode implements Node
 			//create task complete
 			sendTaskComplete();
 			break;
+			
+		case Protocol.TASK_SUMMARY_REQUEST:
+			sendTaskSummary();
+			break;
+			
 		default:
 			System.out.println("Invalid event");	
 		}
@@ -290,7 +295,7 @@ public class MessagingNode implements Node
 	
 	private void sendTaskComplete()
 	{
-		System.out.println(_registryHostName + ":" + _registryPortNum);
+//		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
 		System.out.println(connection);
 		
@@ -298,6 +303,22 @@ public class MessagingNode implements Node
 		try
 		{
 			connection.sendData(request.getBytes());
+		}catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+	}
+	
+	private void sendTaskSummary()
+	{
+//		System.out.println(_registryHostName + ":" + _registryPortNum);
+		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
+		System.out.println(connection);
+		
+		TaskSummaryResponse response = new TaskSummaryResponse(_localHostAddress, _portnum, _sendTracker, _sendSummation, _receiveTracker, _receiveSummation, _relayTracker);
+		try
+		{
+			connection.sendData(response.getBytes());
 		}catch(IOException ioe)
 		{
 			ioe.printStackTrace();
