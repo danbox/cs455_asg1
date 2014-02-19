@@ -163,23 +163,22 @@ public class MessagingNode implements Node
 				//get connection
 				Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 
-				for(int i = 0; i < 5; ++i) //send 5 messages
-				{
-					//create message
-					int payload = (int)Math.random();
-					Message nextMessage = new Message(payload, path);
-					//				System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
-					System.out.println(conn);
 
-					//send message
-					try
-					{
-						conn.sendData(nextMessage.getBytes());
-					}catch(IOException ioe)
-					{
-						ioe.printStackTrace();
-					}
+				//create message
+				int payload = (int)Math.random();
+				Message nextMessage = new Message(payload, path);
+				//				System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
+				System.out.println(conn);
+
+				//send message
+				try
+				{
+					conn.sendData(nextMessage.getBytes());
+				}catch(IOException ioe)
+				{
+					ioe.printStackTrace();
 				}
+
 			}
 			break;
 
@@ -300,9 +299,7 @@ public class MessagingNode implements Node
 		System.out.println("Next: " + next);
 
 		System.out.println(path);
-		//create message
-		int payload = (int)Math.random();
-		Message message = new Message(payload, path);
+
 		//get connection
 		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
@@ -313,13 +310,18 @@ public class MessagingNode implements Node
 		}
 		System.out.println(conn);
 
-		//send message
-		try
+		//send 5 messages per rounds
+		for(int i = 0; i < 5; ++i)
 		{
-			conn.sendData(message.getBytes());
-		}catch(IOException ioe)
-		{
-			ioe.printStackTrace();
+			int payload = (int)Math.random();
+			Message message = new Message(payload, path);
+			try
+			{
+				conn.sendData(message.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
 		}
 	}
 
