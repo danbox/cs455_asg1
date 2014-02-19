@@ -71,6 +71,7 @@ public class EventFactory
 			}
 		}catch(IOException ioe)
 		{
+			System.out.println(data);
 			ioe.printStackTrace();
 		}
 		return null;
