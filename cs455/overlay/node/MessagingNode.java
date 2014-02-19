@@ -233,10 +233,10 @@ public class MessagingNode implements Node
 		LinkedList<Vertex> path = _routingCache.getPath(target);
 		
 		//remove self from path
-		path.remove(0);
+		path.poll();
 		
 		//get next node in path
-		Vertex next = path.get(0);
+		Vertex next = path.element();
 		
 		//get connection
 		Connection conn = _connections.get(next.getIP() + ":" + next.getPort());
