@@ -278,7 +278,7 @@ public class MessagingNode implements Node
 		System.out.println("Destination: " + path.getLast());
 		//get next node in path
 		Vertex next = path.element();
-		
+		System.out.println("Next: " + next);
 		//create message
 		int payload = (int)Math.random();
 		Message message = new Message(payload, path);
