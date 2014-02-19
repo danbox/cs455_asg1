@@ -59,13 +59,13 @@ public class EventFactory
 				System.out.println("Creating register request");
 				return new RegisterRequest(data);
 			case Protocol.TASK_COMPLETE:
-				return new TaskComplete();
+				return new TaskComplete(data);
 			case Protocol.TASK_INITIATE:
 				return new TaskInitiate(data);
 			case Protocol.TASK_SUMMARY_REQUEST:
-				return new TaskSummaryRequest();
+				return new TaskSummaryRequest(data);
 			case Protocol.TASK_SUMMARY_RESPONSE:
-				return new TaskSummaryResponse();
+				return new TaskSummaryResponse(data);
 			default:
 				return new Message();
 			}

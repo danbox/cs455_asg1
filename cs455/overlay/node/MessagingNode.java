@@ -27,6 +27,11 @@ public class MessagingNode implements Node
 	private int                             _portnum;
 	private String							_localHostAddress;
 	private RoutingCache					_routingCache;
+	private int								_sendTracker;
+	private int								_receiveTracker;
+	private int								_relayTracker;
+	private long							_sendSummation;
+	private long							_receiveSummation;
 
 	public MessagingNode()
 	{
@@ -34,6 +39,10 @@ public class MessagingNode implements Node
 		_connections = new Hashtable<String, Connection>();
 		_routingCache = new RoutingCache();
 		_portnum = 0;
+		_sendTracker = 0;
+		_receiveTracker = 0;
+		_sendSummation = 0;
+		_receiveSummation = 0;
 		try
 		{
 			_localHostAddress = InetAddress.getLocalHost().getCanonicalHostName();
@@ -157,8 +166,14 @@ public class MessagingNode implements Node
 			{
 				System.out.println("Reached desination!");
 				System.out.println(message.getPayload());
+				_receiveTracker++;
+				_receiveSummation += message.getPayload();
+				
 			}else
 			{
+				//increment relay tracker
+				_relayTracker++;
+				
 				//get next node in path
 				Vertex next = path.element();
 
@@ -184,7 +199,14 @@ public class MessagingNode implements Node
 			break;
 
 		case Protocol.TASK_INITIATE:
-			sendMessage();
+			//send 5000 rounds
+			for(int i = 0; i < 5000; ++ i)
+			{
+				sendMessageRound();
+			}
+			
+			//create task complete
+			sendTaskComplete();
 			break;
 		default:
 			System.out.println("Invalid event");	
@@ -262,6 +284,12 @@ public class MessagingNode implements Node
 
 		return success;
 	}
+	
+	private void sendTaskComplete()
+	{
+		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
+		System.out.println(connection);
+	}
 
 	public void listConnections()
 	{
@@ -274,7 +302,7 @@ public class MessagingNode implements Node
 		}
 	}
 
-	private void sendMessage()
+	private void sendMessageRound()
 	{
 		//get random target
 		List<Vertex> nodes = _routingCache.getNodes();
@@ -316,6 +344,8 @@ public class MessagingNode implements Node
 		for(int i = 0; i < 5; ++i)
 		{
 			int payload = random.nextInt();
+			_sendTracker++;
+			_sendSummation += payload;
 			Message message = new Message(payload, path);
 			try
 			{
@@ -408,7 +438,7 @@ public class MessagingNode implements Node
 				System.out.println(node._routingCache);
 				break;
 			case "send-message":
-				node.sendMessage();
+				node.sendMessageRound();
 				break;
 			case "quit":
 				quit = true;
