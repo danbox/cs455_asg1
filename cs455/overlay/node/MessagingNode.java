@@ -147,6 +147,7 @@ public class MessagingNode implements Node
 			
 			LinkedList<Vertex> path = message.getPath();
 			
+			System.out.println(path);
 			path.poll();
 			
 			System.out.println(path);
@@ -289,6 +290,8 @@ public class MessagingNode implements Node
 		//get next node in path
 		Vertex next = path.element();
 		System.out.println("Next: " + next);
+		
+		System.out.println(path);
 		//create message
 		int payload = (int)Math.random();
 		Message message = new Message(payload, path);
