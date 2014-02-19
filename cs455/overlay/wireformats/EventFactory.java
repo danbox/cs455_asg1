@@ -28,6 +28,7 @@ public class EventFactory
 
 		try
 		{
+			System.out.println(data);
 			int eventType = din.readInt();
 	        baInputStream.close();
 	        din.close();
@@ -71,7 +72,7 @@ public class EventFactory
 			}
 		}catch(IOException ioe)
 		{
-			System.out.println(data);
+//			System.out.println(data);
 			ioe.printStackTrace();
 		}
 		return null;
