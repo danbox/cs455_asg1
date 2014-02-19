@@ -11,7 +11,7 @@ import java.io.IOException;
 public class TaskSummaryResponse implements Event
 {
 
-	public final int 	_TYPE = Protocol.TASK_COMPLETE;
+	public final int 	_TYPE = Protocol.TASK_SUMMARY_RESPONSE;
 	private String 		_ip;
 	private int			_port;
 	private int 		_sendTracker;
