@@ -19,12 +19,14 @@ public class Registry implements Node
 	private TCPServerThread 				_server;
 	private Hashtable<String, Connection> 	_connections;
 	private int                             _portnum;
+	private int								_completedTasks;
 
 
 	public Registry()
 	{
 		_server = new TCPServerThread(this);
 		_connections = new Hashtable<String, Connection>();
+		_completedTasks = 0;
 	}
 
 	@Override
@@ -69,6 +71,10 @@ public class Registry implements Node
 			
 		case Protocol.TASK_COMPLETE:
 			System.out.println("TASK COMPLETE");
+			if(++_completedTasks == _connections.size()) //all completed
+			{
+				sendTaskSummaryRequest();
+			}
 			break;
 			
 		default:
@@ -191,6 +197,22 @@ public class Registry implements Node
 			try
 			{
 				connection.sendData(init.getBytes());
+			}catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+			}
+		}
+	}
+	
+	private void sendTaskSummaryRequest()
+	{
+		List<Connection> connList = new ArrayList<Connection>(_connections.values());
+		TaskSummaryRequest req = new TaskSummaryRequest();
+		for(Connection connection : connList)
+		{
+			try
+			{
+				connection.sendData(req.getBytes());
 			}catch(IOException ioe)
 			{
 				ioe.printStackTrace();
