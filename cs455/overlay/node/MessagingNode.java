@@ -239,7 +239,8 @@ public class MessagingNode implements Node
 		Vertex next = path.element();
 		
 		//get connection
-		Connection conn = _connections.get(next.getIP() + ":" + next.getPort());
+		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
+		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 		System.out.println(conn);
 	}
 	
