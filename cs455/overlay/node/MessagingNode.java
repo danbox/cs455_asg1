@@ -149,7 +149,9 @@ public class MessagingNode implements Node
 			
 			path.poll();
 			
-			if(path.size() == 0) //reached destination
+			System.out.println(path);
+			
+			if(path.isEmpty()) //reached destination
 			{
 				System.out.println("Reached desination!");
 			}else
