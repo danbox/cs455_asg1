@@ -348,8 +348,8 @@ public class MessagingNode implements Node
 
 		//send 5 messages per rounds
 		Random random = new Random();
-		for(int i = 0; i < 5; ++i)
-		{
+//		for(int i = 0; i < 5; ++i)
+//		{
 			int payload = random.nextInt();
 			_sendTracker++;
 			_sendSummation += payload;
@@ -361,7 +361,7 @@ public class MessagingNode implements Node
 			{
 				ioe.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	public static void main(String[] args)
