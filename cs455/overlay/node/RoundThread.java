@@ -23,7 +23,7 @@ public class RoundThread extends Thread
 	public void run()
 	{
 		//get random target
-		for(int round = 0; round < 500; ++round)
+		for(int round = 0; round < 100; ++round)
 		{
 			System.out.println(round);
 			List<Vertex> nodes = _node.get_routingCache().getNodes();

@@ -28,7 +28,10 @@ public class EventFactory
 
 		try
 		{
-			System.out.println(data);
+			for(byte b : data)
+			{
+				System.out.print(Integer.toHexString(b));
+			}
 			int eventType = din.readInt();
 	        baInputStream.close();
 	        din.close();
