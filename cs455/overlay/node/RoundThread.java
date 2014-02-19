@@ -52,24 +52,24 @@ public class RoundThread extends Thread
 			{
 				conn = _node.get_connections().get(next.getIP() + ":" + next.getPort());
 			}
-//			System.out.println(conn);
+			//			System.out.println(conn);
 
 			//send 5 messages per rounds
 			Random random = new Random();
-			//				for(int i = 0; i < 5; ++i)
-			//				{
-			int payload = random.nextInt();
-			_node.set_sendTracker(_node.get_sendTracker() + 1);
-			_node.set_sendSummation(_node.get_sendSummation() + payload);
-			Message message = new Message(payload, path);
-			try
+			for(int i = 0; i < 5; ++i)
 			{
-				conn.sendData(message.getBytes());
-			}catch(IOException ioe)
-			{
-				ioe.printStackTrace();
+				int payload = random.nextInt();
+				_node.set_sendTracker(_node.get_sendTracker() + 1);
+				_node.set_sendSummation(_node.get_sendSummation() + payload);
+				Message message = new Message(payload, path);
+				try
+				{
+					conn.sendData(message.getBytes());
+				}catch(IOException ioe)
+				{
+					ioe.printStackTrace();
+				}
 			}
-			//				}
 			try
 			{
 				Thread.sleep(10);
