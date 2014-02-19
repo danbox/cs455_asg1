@@ -225,7 +225,9 @@ public class MessagingNode implements Node
 		connection.setListeningPort(request.getPort());
 		
 		//replace with correct port
+		_connections.remove(socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort());
 		_connections.put(socket.getInetAddress().getCanonicalHostName() + ":" + request.getPort(), connection);
+		
 		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
