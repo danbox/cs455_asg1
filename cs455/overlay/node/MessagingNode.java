@@ -286,6 +286,10 @@ public class MessagingNode implements Node
 		//get connection
 //		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
+		if(conn == null)
+		{
+			conn = _connections.get(next.getIP() + ":" + next.getPort());
+		}
 		System.out.println(conn);
 		
 		//send message
