@@ -36,6 +36,7 @@ public class Message implements Event
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
+		_path = new LinkedList<Vertex>();
 
 		int type = din.readInt(); //read int for type
 		if(type != _TYPE) //invalid type
