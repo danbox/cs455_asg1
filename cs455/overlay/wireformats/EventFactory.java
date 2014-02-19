@@ -19,7 +19,7 @@ public class EventFactory
 		return instance;
 	}
 
-	public static Event createEvent(byte[] data)
+	public synchronized static Event createEvent(byte[] data)
 	{
 		ByteArrayInputStream baInputStream = new ByteArrayInputStream(data);
 		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
