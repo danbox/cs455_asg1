@@ -252,7 +252,7 @@ public class MessagingNode implements Node
 		Set<String> keys = _connections.keySet();
 		for(String key : keys)
 		{
-			System.out.println(_connections.get(key));
+			System.out.println(_connections.get(key).getName());
 			System.out.println(_connections.get(key).getPort());
 		}
 	}
@@ -285,7 +285,7 @@ public class MessagingNode implements Node
 		int payload = (int)Math.random();
 		Message message = new Message(payload, path);
 		//get connection
-//		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
+		System.out.println(next.getIP() + ":" + next.getPort() + ":" + next.getListeningPort());
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 		if(conn == null)
 		{
