@@ -193,15 +193,15 @@ public class MessagingNode implements Node
 			break;
 
 		case Protocol.TASK_INITIATE:
-			
+			RoundThread thread = new RoundThread(this);
+			thread.start();
 			
 			//create task complete
 			sendTaskComplete();
 			break;
 			
 		case Protocol.TASK_SUMMARY_REQUEST:
-			RoundThread thread = new RoundThread(this);
-			thread.start();
+			sendTaskSummary();
 			break;
 			
 		default:
@@ -281,7 +281,7 @@ public class MessagingNode implements Node
 		return success;
 	}
 	
-	private void sendTaskComplete()
+	protected void sendTaskComplete()
 	{
 //		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
@@ -297,7 +297,7 @@ public class MessagingNode implements Node
 		}
 	}
 	
-	protected void sendTaskSummary()
+	private void sendTaskSummary()
 	{
 //		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);

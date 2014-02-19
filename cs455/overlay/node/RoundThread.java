@@ -78,6 +78,6 @@ public class RoundThread extends Thread
 				uhe.printStackTrace();
 			}
 		}
-		_node.sendTaskSummary();
+		_node.sendTaskComplete();
 	}
 }
