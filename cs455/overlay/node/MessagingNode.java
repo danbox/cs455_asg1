@@ -287,6 +287,7 @@ public class MessagingNode implements Node
 	
 	private void sendTaskComplete()
 	{
+		System.out.println(_registryHostName + ":" + _registryPortNum);
 		Connection connection = _connections.get(_registryHostName + ":" + _registryPortNum);
 		System.out.println(connection);
 	}
