@@ -25,6 +25,7 @@ public class RoundThread extends Thread
 		//get random target
 		for(int round = 0; round < 5000; ++round)
 		{
+			System.out.println(round);
 			List<Vertex> nodes = _node.get_routingCache().getNodes();
 			int targetIndex = (int)(1 + Math.random() * (nodes.size() - 1));
 			Vertex target = nodes.get(targetIndex);
@@ -51,7 +52,7 @@ public class RoundThread extends Thread
 			{
 				conn = _node.get_connections().get(next.getIP() + ":" + next.getPort());
 			}
-			System.out.println(conn);
+//			System.out.println(conn);
 
 			//send 5 messages per rounds
 			Random random = new Random();
