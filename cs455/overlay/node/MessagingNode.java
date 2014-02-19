@@ -254,6 +254,7 @@ public class MessagingNode implements Node
 		{
 			System.out.println(_connections.get(key).getName());
 			System.out.println(_connections.get(key).getPort());
+			System.out.println(_connections.get(key).getListeningPort());
 		}
 	}
 	
