@@ -222,7 +222,7 @@ public class MessagingNode implements Node
 		Connection connection = _connections.get(socket.getInetAddress().getCanonicalHostName() + ":" + socket.getPort());
 		
 		connection.setLinkWeight(request.getLinkWeight());
-		connection.setListeningPort(socket.getPort());
+		connection.setListeningPort(request.getPort());
 		if(request.getIP().equals(socket.getInetAddress().getCanonicalHostName())) //valid ip address in request
 		{
 			success = 0;
@@ -289,6 +289,7 @@ public class MessagingNode implements Node
 		Connection conn = _connections.get(next.getIP() + ":" + next.getListeningPort());
 		if(conn == null)
 		{
+			System.out.println("it was null.........");
 			conn = _connections.get(next.getIP() + ":" + next.getPort());
 		}
 		System.out.println(conn);
