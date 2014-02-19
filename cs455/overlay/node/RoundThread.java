@@ -59,7 +59,7 @@ public class RoundThread extends Thread
 			//				for(int i = 0; i < 5; ++i)
 			//				{
 			int payload = random.nextInt();
-			_node.set_sendTracker(_node.get_sendTracker());
+			_node.set_sendTracker(_node.get_sendTracker() + 1);
 			_node.set_sendSummation(_node.get_sendSummation() + payload);
 			Message message = new Message(payload, path);
 			try
