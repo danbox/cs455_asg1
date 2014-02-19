@@ -5,11 +5,15 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 import cs455.overlay.dijkstra.RoutingCache;
+import cs455.overlay.dijkstra.Vertex;
 import cs455.overlay.transport.*;
 import cs455.overlay.wireformats.*;
 
@@ -217,6 +221,28 @@ public class MessagingNode implements Node
 			System.out.println(_connections.get(key));
 		}
 	}
+	
+	private void sendMessage()
+	{
+		//get random target
+		List<Vertex> nodes = _routingCache.getNodes();
+		int targetIndex = (int)(1 + Math.random() * (nodes.size()));
+		Vertex target = nodes.get(targetIndex);
+		
+		//set path
+		LinkedList<Vertex> path = _routingCache.getPath(target);
+		
+		//remove self from path
+		path.poll();
+		
+		//get next node in path
+		Vertex next = path.element();
+		
+		//get connection
+		Connection conn = _connections.get(next.getIP() + ":" + next.getPort());
+		System.out.println(conn);
+	}
+	
 	public static void main(String[] args)
 	{
 		//printing host name for debugging
@@ -297,6 +323,8 @@ public class MessagingNode implements Node
 			case "print-cache":
 				System.out.println(node._routingCache);
 				break;
+			case "send-message":
+				
 			case "quit":
 				quit = true;
 				break;

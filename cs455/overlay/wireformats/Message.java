@@ -1,38 +1,117 @@
 package cs455.overlay.wireformats;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+import cs455.overlay.node.MessagingNode;
+
 public class Message implements Event
 {
-	private String _message;
+	private final int			_TYPE = Protocol.MESSAGE;
+	private int 				_payload;
+	private List<String> 		_path;
 	
 	public Message()
 	{
-		_message = new String();
+		_path = new LinkedList<String>();
+	}
+
+	public Message(int payload, List<String> path)
+	{
+		_payload = payload;
+		_path = path;
+	}
+
+	public Message(byte[] marshalledBytes) throws IOException
+	{
+		ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshalledBytes);
+		DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
+
+		int type = din.readInt(); //read int for type
+		if(type != _TYPE) //invalid type
+		{
+			System.out.println("Invalid type");
+			return;
+		}
+
+		_payload = din.readInt();
+		
+		int pathCount = din.readInt();
+		for(int i = 0; i < pathCount; ++i)
+		{
+			int nodeLength = din.readInt();
+			byte[] nodeBytes = new byte[nodeLength];
+			din.readFully(nodeBytes);
+			
+			_path.add(new String(nodeBytes));
+		}
+
+		baInputStream.close();
+		din.close();
 	}
 	
-	public Message(String message)
+	public void setPayload(int payload)
 	{
-		_message = message;
+		_payload = payload;
 	}
-	
-	public void set_message(String message)
+
+	public int getPayload()
 	{
-		_message = message;
+		return _payload;
 	}
-	
-	public String get_message()
+
+	public void setPath(List<String> path)
 	{
-		return _message;
+		_path = path;
 	}
-	
-	@Override
-	public int getType()
+
+	public List<String> getPath()
 	{
-		return 0;
+		return _path;
 	}
 
 	@Override
-	public byte[] getBytes() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getType()
+	{
+		return _TYPE;
+	}
+
+	@Override
+	public byte[] getBytes() throws IOException
+	{
+		byte[] marshalledBytes = null;
+		ByteArrayOutputStream baOutputStream = new ByteArrayOutputStream();
+		DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baOutputStream));
+
+		dout.writeInt(_TYPE);
+		
+		dout.writeInt(_payload);
+		
+		dout.writeInt(_path.size());
+		
+		for(String node : _path)
+		{
+			byte[] nodeBytes = node.getBytes();
+			int elementLength = nodeBytes.length;
+			dout.writeInt(elementLength);
+			dout.write(nodeBytes);
+		}
+
+		dout.flush();
+		marshalledBytes = baOutputStream.toByteArray();
+
+		baOutputStream.close();
+		dout.close();
+
+		return marshalledBytes;
 	}
 }
