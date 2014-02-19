@@ -197,6 +197,8 @@ public class MessagingNode implements Node
 			for(int i = 0; i < 5000; ++ i)
 			{
 				sendMessageRound();
+				int j = 0;
+				System.out.println(++j);
 				try 
 				{
 					TimeUnit.MILLISECONDS.sleep(100);
