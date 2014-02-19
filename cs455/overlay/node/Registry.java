@@ -73,6 +73,13 @@ public class Registry implements Node
 			System.out.println("TASK COMPLETE");
 			if(++_completedTasks == _connections.size()) //all completed
 			{
+				try
+				{
+					TimeUnit.SECONDS.sleep(5);
+				}catch(InterruptedException ie)
+				{
+					ie.printStackTrace();
+				}
 				sendTaskSummaryRequest();
 			}
 			break;
