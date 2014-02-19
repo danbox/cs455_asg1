@@ -274,7 +274,7 @@ public class MessagingNode implements Node
 		}
 		
 		//remove self from path
-		path.poll();
+//		path.poll();
 		System.out.println("Destination: " + path.getLast());
 		//get next node in path
 		Vertex next = path.element();
